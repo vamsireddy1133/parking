@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
-  ArrowRight, Target, Eye, Award, Users, MapPin, Calendar, Linkedin,
+  ArrowRight, Target, Eye, Award, MapPin, Calendar, Linkedin,
 } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
@@ -177,15 +177,10 @@ export default function About() {
             >
               <div className="grid grid-cols-1 md:grid-cols-5">
 
-                {/* Photo placeholder */}
-                <div className="md:col-span-2 bg-gradient-to-br from-dcs-navy to-dcs-navy-dark min-h-[320px] flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 grid-bg opacity-40" />
-                  <div className="relative text-center p-8">
-                    <div className="w-32 h-32 rounded-full bg-dcs-red/10 border-2 border-dcs-red/30 flex items-center justify-center mx-auto mb-4">
-                      <Users size={48} className="text-dcs-red/50" />
-                    </div>
-                    <p className="text-gray-500 font-inter text-xs italic">Professional portrait — Mohan Karedla</p>
-                  </div>
+                {/* Team photo */}
+                <div className="md:col-span-2 min-h-[320px] relative overflow-hidden">
+                  <img src="/about-team.jpg" alt="Mohan Karedla — Founder & MD, DCS Parking Solutions" className="w-full h-full object-cover object-top absolute inset-0" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-dcs-navy-light/30" />
                 </div>
 
                 {/* Bio */}

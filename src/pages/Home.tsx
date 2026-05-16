@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import {
-  ArrowRight, ChevronDown, Star, Car, PenTool,
-  Building2, Monitor, CheckCircle, Quote,
+  ArrowRight, ChevronDown, Star, PenTool,
+  Building2, Monitor, CheckCircle, Quote, Car,
 } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
@@ -84,18 +84,21 @@ const projects = [
     category: 'Commercial',
     description: 'Multi-level parking structure with 840 bays — full epoxy marking, reflective signage, and live BMS dashboard.',
     badge: 'bg-blue-500/20 text-blue-300',
+    image: '/p1.png',
   },
   {
     title: 'Hetero Pharma GMP Plant',
     category: 'Industrial',
     description: 'HFL-rated reflective zone markings and hazard signage across a 12-acre manufacturing campus in Jeedimetla.',
     badge: 'bg-orange-500/20 text-orange-300',
+    image: '/p2.png',
   },
   {
     title: 'My Home Jewel Residences',
     category: 'Residential',
     description: 'Premium apartment complex with color-coded visitor zones, pillar numbering system, and 24/7 management software.',
     badge: 'bg-emerald-500/20 text-emerald-300',
+    image: '/p3.png',
   },
 ]
 
@@ -104,11 +107,13 @@ const testimonials = [
     name: 'Arun Sharma',
     role: 'Facilities Manager, Prestige Group',
     text: 'DCS transformed our chaotic parking situation into a model facility. The epoxy markings are still perfect three years on. Highly recommended.',
+    avatar: '/testimonial-1.jpg',
   },
   {
     name: 'Priya Nair',
     role: 'Project Head, My Home Jewel',
     text: 'Their BMS software has reduced parking disputes by 80%. The team was professional, on-time, and delivered exactly what they promised.',
+    avatar: '/testimonial-2.jpg',
   },
 ]
 
@@ -119,6 +124,8 @@ export default function Home() {
 
       {/* ── Hero ── */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <img src="/hero.jpg" alt="DCS Parking Solutions" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-dcs-navy-dark/75" />
         <div className="absolute inset-0 grid-bg" />
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-dcs-red/8 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-dcs-navy-dark to-transparent" />
@@ -319,10 +326,10 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group glow-hover"
               >
-                <div className="h-52 bg-gradient-to-br from-dcs-navy to-dcs-navy-dark relative flex items-end p-5 overflow-hidden">
-                  <div className="absolute inset-0 grid-bg opacity-50" />
-                  <Car size={80} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/4 group-hover:scale-110 transition-transform duration-500" />
-                  <span className={`relative text-xs font-inter font-semibold px-3 py-1 rounded-full ${p.badge}`}>
+                <div className="h-52 relative overflow-hidden bg-dcs-navy">
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <span className={`absolute bottom-3 left-3 text-xs font-inter font-semibold px-3 py-1 rounded-full border backdrop-blur-sm ${p.badge}`}>
                     {p.category}
                   </span>
                 </div>
@@ -361,9 +368,12 @@ export default function Home() {
               >
                 <Quote size={32} className="text-dcs-red/30 mb-4" />
                 <p className="text-gray-300 font-inter text-sm leading-relaxed mb-6 italic">"{t.text}"</p>
-                <div>
-                  <p className="font-outfit font-bold text-white text-sm">{t.name}</p>
-                  <p className="text-gray-500 font-inter text-xs mt-0.5">{t.role}</p>
+                <div className="flex items-center space-x-3">
+                  <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover border border-white/10" />
+                  <div>
+                    <p className="font-outfit font-bold text-white text-sm">{t.name}</p>
+                    <p className="text-gray-500 font-inter text-xs mt-0.5">{t.role}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}
