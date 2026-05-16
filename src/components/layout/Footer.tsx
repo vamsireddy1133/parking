@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ParkingSquare, MapPin, Phone, Mail, Linkedin, Instagram, Facebook } from 'lucide-react'
+import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook } from 'lucide-react'
 
 const services = ['Parking Markings', 'Layout Design', 'Signage Boards', 'BMS Software']
 const quickLinks = [
@@ -17,14 +17,12 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-3 mb-5">
-              <div className="w-10 h-10 bg-dcs-red rounded-xl flex items-center justify-center shadow-lg shadow-dcs-red/30">
-                <ParkingSquare size={20} className="text-white" />
-              </div>
-              <div>
-                <p className="font-outfit font-extrabold text-white text-base leading-none">DCS Parking</p>
-                <p className="text-[11px] text-gray-500 font-inter tracking-widest uppercase mt-0.5">Solutions</p>
-              </div>
+            <Link to="/" className="inline-flex mb-5">
+              <img
+                src="/logo.png"
+                alt="DCS Parking Solutions"
+                className="h-10 w-auto object-contain opacity-90 hover:opacity-100 transition-opacity"
+              />
             </Link>
             <p className="text-gray-400 font-inter text-sm leading-relaxed mb-6">
               Durga Consulting Services — South India's trusted partner for end-to-end parking infrastructure since 2015.

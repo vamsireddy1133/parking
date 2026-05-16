@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { ParkingSquare } from 'lucide-react'
 
 export default function PageLoader() {
   return (
@@ -8,39 +7,34 @@ export default function PageLoader() {
       exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } }}
       className="fixed inset-0 z-[200] bg-dcs-navy-dark flex flex-col items-center justify-center"
     >
-      {/* Outer spinning ring */}
-      <div className="relative w-24 h-24 mb-8">
+      {/* Logo with spinning ring */}
+      <div className="relative mb-8">
+        {/* Outer spinning ring */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 1.2, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-0 rounded-full border-2 border-transparent border-t-dcs-red border-r-dcs-red/30"
+          transition={{ duration: 1.4, repeat: Infinity, ease: 'linear' }}
+          className="absolute -inset-4 rounded-full border-2 border-transparent border-t-dcs-red border-r-dcs-red/20"
         />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-          className="absolute inset-2 rounded-full border border-transparent border-b-white/10"
+        {/* Logo */}
+        <motion.img
+          src="/logo.png"
+          alt="DCS Parking Solutions"
+          animate={{ scale: [1, 1.04, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          className="h-16 w-auto object-contain relative z-10"
         />
-        {/* Center icon */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
-            animate={{ scale: [1, 1.1, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="w-12 h-12 rounded-xl bg-dcs-red/10 border border-dcs-red/30 flex items-center justify-center"
-          >
-            <ParkingSquare size={22} className="text-dcs-red" />
-          </motion.div>
-        </div>
       </div>
 
-      {/* Brand name */}
+      {/* Loading label */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5 }}
-        className="text-center"
+        className="flex items-center space-x-1.5"
       >
-        <p className="font-outfit font-black text-xl text-white tracking-tight">DCS Parking Solutions</p>
-        <p className="font-inter text-xs text-gray-500 mt-1 uppercase tracking-widest">Loading…</p>
+        <span className="w-2 h-2 rounded-full bg-dcs-red dot-1" />
+        <span className="w-2 h-2 rounded-full bg-dcs-red dot-2" />
+        <span className="w-2 h-2 rounded-full bg-dcs-red dot-3" />
       </motion.div>
 
       {/* Progress bar */}

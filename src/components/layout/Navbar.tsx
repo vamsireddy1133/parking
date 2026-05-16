@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronRight, ParkingSquare } from 'lucide-react'
+import { Menu, X, ChevronRight } from 'lucide-react'
 
 const navLinks = [
   { name: 'Home',     path: '/' },
@@ -40,14 +40,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-20">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-dcs-red rounded-xl flex items-center justify-center group-hover:bg-dcs-red-dark transition-colors shadow-lg shadow-dcs-red/30">
-              <ParkingSquare size={20} className="text-white" />
-            </div>
-            <div className="leading-none">
-              <p className="font-outfit font-extrabold text-white text-lg tracking-tight">DCS Parking</p>
-              <p className="text-[11px] text-gray-400 font-inter tracking-widest uppercase">Solutions</p>
-            </div>
+          <Link to="/" className="flex items-center group">
+            <img
+              src="/logo.png"
+              alt="DCS Parking Solutions"
+              className="h-12 w-auto object-contain group-hover:opacity-90 transition-opacity duration-200"
+            />
           </Link>
 
           {/* Desktop links */}
