@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
-  ArrowRight, Target, Eye, Award, MapPin, Calendar, Linkedin,
+  ArrowRight, Target, Eye, Award, Users, MapPin, Calendar, Linkedin,
 } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
