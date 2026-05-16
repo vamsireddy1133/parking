@@ -71,7 +71,7 @@ function Input({ label, ...props }: { label: string } & React.InputHTMLAttribute
       </label>
       <input
         {...props}
-        className="w-full bg-white/8 border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:bg-dcs-red/5 focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm placeholder-gray-500 outline-none transition-all duration-200"
+        className="w-full bg-[#0d1b2e] border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm placeholder-gray-500 outline-none transition-all duration-200 autofill:bg-[#0d1b2e]"
       />
     </div>
   )
@@ -85,7 +85,7 @@ function Select({ label, options, ...props }: { label: string; options: string[]
       </label>
       <select
         {...props}
-        className="w-full bg-white/8 border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:bg-dcs-red/5 focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
+        className="w-full bg-[#0d1b2e] border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
       >
         <option value="" className="bg-dcs-navy-dark">Select an option…</option>
         {options.map((o) => (
@@ -283,7 +283,7 @@ export default function Contact() {
                               placeholder="Describe your site, timeline, specific challenges, or any questions you have…"
                               value={form.message}
                               onChange={set('message')}
-                              className="w-full bg-white/8 border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:bg-dcs-red/5 focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm placeholder-gray-500 outline-none transition-all duration-200 resize-none"
+                              className="w-full bg-[#0d1b2e] border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm placeholder-gray-500 outline-none transition-all duration-200 resize-none"
                             />
                           </div>
                           <p className="text-gray-500 font-inter text-xs">

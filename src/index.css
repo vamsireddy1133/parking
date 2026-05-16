@@ -69,6 +69,19 @@
   .link-underline:hover::after { width: 100%; }
 }
 
+/* ── Autofill override — prevents Chrome white flash on inputs ── */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #0d1b2e inset !important;
+  -webkit-text-fill-color: #ffffff !important;
+  caret-color: #ffffff;
+  border-color: rgba(255,255,255,0.2) !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 /* ── Keyframes ── */
 @keyframes shimmer {
   0%   { background-position: 200% 0; }
