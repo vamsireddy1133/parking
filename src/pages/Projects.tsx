@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { Car, ArrowRight, MapPin } from 'lucide-react'
+import { ArrowRight, MapPin } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
 type Category = 'All' | 'Commercial' | 'Industrial' | 'Residential' | 'Healthcare' | 'Government'
@@ -15,7 +15,7 @@ interface Project {
   year: string
   desc: string
   badge: string
-  gradient: string
+  image: string
   imageAlt: string
 }
 
@@ -29,8 +29,8 @@ const projects: Project[] = [
     year: '2024',
     desc: 'Multi-level parking structure across three basement floors. Full epoxy marking, reflective bay numbering, and live ParkOS BMS dashboard with ANPR entry gates.',
     badge: 'bg-blue-500/20 text-blue-300 border-blue-500/20',
-    gradient: 'from-blue-900/40 to-slate-900',
-    imageAlt: 'Aerial view of a modern multi-storey parking structure at a glass-facade tech park, with brightly marked bays and directional signage',
+    image: '/p1.png',
+    imageAlt: 'Prestige Tech Park parking facility',
   },
   {
     title: 'Hetero Pharma GMP Plant',
@@ -41,8 +41,8 @@ const projects: Project[] = [
     year: '2024',
     desc: 'HFL-rated reflective zone markings for heavy vehicle lanes, chemical storage demarcation, and full statutory safety signage across a 12-acre GMP manufacturing campus.',
     badge: 'bg-orange-500/20 text-orange-300 border-orange-500/20',
-    gradient: 'from-orange-900/40 to-slate-900',
-    imageAlt: 'Industrial parking lot with high-visibility yellow and white epoxy markings, heavy vehicle lanes, and safety signage at a pharmaceutical plant',
+    image: '/p2.png',
+    imageAlt: 'Hetero Pharma GMP Plant parking',
   },
   {
     title: 'My Home Jewel Residences',
@@ -53,8 +53,8 @@ const projects: Project[] = [
     year: '2023',
     desc: 'Premium residential tower with color-coded zone markings per tower block, visitor bay management, pillar number system, and resident app-based parking allocation.',
     badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/20',
-    gradient: 'from-emerald-900/40 to-slate-900',
-    imageAlt: 'Clean basement parking of a luxury residential complex with color-coded bay markings and illuminated pillar numbering',
+    image: '/p3.png',
+    imageAlt: 'My Home Jewel Residences parking',
   },
   {
     title: 'Phoenix MarketCity Mall',
@@ -63,10 +63,10 @@ const projects: Project[] = [
     services: ['Parking Markings', 'Signage Boards', 'BMS Software'],
     bays: '1600',
     year: '2023',
-    desc: 'End-to-end parking solution for one of Bengaluru\'s largest retail destinations. Includes EV charging bay marking, dynamic LED wayfinding totems, and FASTag-integrated billing.',
+    desc: "End-to-end parking solution for one of Bengaluru's largest retail destinations. Includes EV charging bay marking, dynamic LED wayfinding totems, and FASTag-integrated billing.",
     badge: 'bg-blue-500/20 text-blue-300 border-blue-500/20',
-    gradient: 'from-purple-900/40 to-slate-900',
-    imageAlt: 'Busy retail mall parking structure with bright LED wayfinding signage and EV charging marked bays',
+    image: '/p4.png',
+    imageAlt: 'Phoenix MarketCity Mall parking',
   },
   {
     title: 'Apollo Hospitals Campus',
@@ -77,8 +77,8 @@ const projects: Project[] = [
     year: '2023',
     desc: 'Specialised hospital campus layout with dedicated ambulance corridors, priority parking for patients and disabled visitors, visitor time-based billing, and 24/7 occupancy monitoring.',
     badge: 'bg-red-500/20 text-red-300 border-red-500/20',
-    gradient: 'from-red-900/30 to-slate-900',
-    imageAlt: 'Hospital campus parking with clearly marked ambulance bays, disabled priority parking, and bright directional signage',
+    image: '/p5.png',
+    imageAlt: 'Apollo Hospitals Campus parking',
   },
   {
     title: 'GHMC Municipal Complex',
@@ -89,8 +89,8 @@ const projects: Project[] = [
     year: '2022',
     desc: 'Complete redesign and marking of the Greater Hyderabad Municipal Corporation staff and visitor car park, delivering 35% more bays through optimised layout and two-way flow redesign.',
     badge: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/20',
-    gradient: 'from-yellow-900/30 to-slate-900',
-    imageAlt: 'Government building parking area with neatly organised bays, statutory signage, and clear directional markings',
+    image: '/p6.png',
+    imageAlt: 'GHMC Municipal Complex parking',
   },
   {
     title: 'Birla Open Minds School',
@@ -101,8 +101,8 @@ const projects: Project[] = [
     year: '2022',
     desc: 'Safe school drop-off and parking zone design with parent vehicle stacking lanes, bus bay demarcation, and anti-skid epoxy in pedestrian crossing areas.',
     badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/20',
-    gradient: 'from-teal-900/40 to-slate-900',
-    imageAlt: 'School entrance parking with child-safe coloured markings, parent drop-off zones, and clear bus bay signage',
+    image: '/p7.png',
+    imageAlt: 'Birla Open Minds School parking',
   },
   {
     title: 'BHEL Heavy Engineering Plant',
@@ -113,8 +113,8 @@ const projects: Project[] = [
     year: '2022',
     desc: 'Heavy industry campus covering crane travel paths, restricted zone demarcation, fire hydrant clearance markings, and high-load-rated epoxy for forklift traffic zones.',
     badge: 'bg-orange-500/20 text-orange-300 border-orange-500/20',
-    gradient: 'from-amber-900/40 to-slate-900',
-    imageAlt: 'Large industrial plant parking with heavy machinery zone markings, yellow safety lines, and forklift crossing signs',
+    image: '/p8.png',
+    imageAlt: 'BHEL Heavy Engineering Plant parking',
   },
   {
     title: 'Marriott Hyderabad',
@@ -125,8 +125,8 @@ const projects: Project[] = [
     year: '2021',
     desc: 'Luxury hotel valet and self-parking integration with brand-consistent signage in brushed stainless steel, ANPR valet ticketing, and live dashboard for concierge staff.',
     badge: 'bg-blue-500/20 text-blue-300 border-blue-500/20',
-    gradient: 'from-indigo-900/40 to-slate-900',
-    imageAlt: 'Upscale hotel basement parking with brushed steel directional signage and premium bay markings in pristine condition',
+    image: '/p9.png',
+    imageAlt: 'Marriott Hyderabad parking',
   },
 ]
 
@@ -215,15 +215,20 @@ export default function Projects() {
                   transition={{ duration: 0.4, delay: i * 0.06 }}
                   className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group glow-hover"
                 >
-                  {/* Image / Visual */}
-                  <div className={`h-48 bg-gradient-to-br ${p.gradient} relative flex items-end p-4 overflow-hidden`}>
-                    <div className="absolute inset-0 grid-bg opacity-30" />
-                    <Car size={72} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 group-hover:scale-110 transition-transform duration-500" />
-                    <div className="relative flex items-center justify-between w-full">
-                      <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border ${p.badge}`}>
+                  {/* Project Image */}
+                  <div className="h-52 relative overflow-hidden bg-dcs-navy">
+                    <img
+                      src={p.image}
+                      alt={p.imageAlt}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
+                    {/* Dark overlay for badge readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
+                      <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border backdrop-blur-sm ${p.badge}`}>
                         {p.category}
                       </span>
-                      <span className="text-gray-500 font-inter text-xs">{p.year}</span>
+                      <span className="text-white/70 font-inter text-xs bg-black/30 backdrop-blur-sm px-2 py-0.5 rounded-full">{p.year}</span>
                     </div>
                   </div>
 
