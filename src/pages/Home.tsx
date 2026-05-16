@@ -7,6 +7,16 @@ import {
 } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
+/* ── Floating hero particles ── */
+const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+  id: i,
+  size: [3, 4, 2, 5, 3, 4, 2, 3, 5, 2, 4, 3, 2, 4, 3, 5, 2, 3][i],
+  x: [8, 18, 30, 42, 55, 65, 75, 85, 92, 12, 25, 38, 50, 62, 72, 82, 90, 5][i],
+  y: [15, 70, 30, 80, 20, 60, 40, 75, 25, 45, 85, 55, 10, 65, 35, 50, 80, 90][i],
+  dur: [12, 16, 10, 18, 14, 11, 15, 13, 17, 12, 16, 10, 14, 18, 11, 15, 13, 9][i],
+  del: [0, 2, 4, 1, 3, 5, 0, 2, 4, 1, 3, 5, 0, 2, 4, 1, 3, 5][i],
+}))
+
 /* ── Animated counter ── */
 function useCounter(target: number) {
   const [count, setCount] = useState(0)
@@ -113,13 +123,24 @@ export default function Home() {
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-dcs-red/8 rounded-full blur-[120px] pointer-events-none" />
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-dcs-navy-dark to-transparent" />
 
+        {/* Floating particles */}
+        {PARTICLES.map((p) => (
+          <motion.div
+            key={p.id}
+            className="absolute rounded-full bg-dcs-red/25 pointer-events-none"
+            style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%` }}
+            animate={{ y: [0, -20, 0], opacity: [0.2, 0.6, 0.2] }}
+            transition={{ duration: p.dur, delay: p.del, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        ))}
+
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 text-center">
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-5 py-2 mb-8"
+            className="inline-flex items-center space-x-2 bg-white/5 border border-white/10 rounded-full px-5 py-2 mb-8 relative"
           >
             <Star size={13} className="text-dcs-red fill-dcs-red" />
             <span className="text-xs font-inter text-gray-300 tracking-wide">South India's #1 Parking Solutions Provider</span>
@@ -205,7 +226,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 viewport={{ once: true }}
-                className="bg-dcs-navy-light rounded-2xl p-6 border border-white/5 hover:border-white/15 transition-all duration-300 group cursor-default"
+                className="bg-dcs-navy-light rounded-2xl p-6 border border-white/5 hover:border-white/15 transition-all duration-300 group cursor-default glow-hover"
               >
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${s.gradient} border border-white/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
                   <s.icon size={22} className="text-white" />
@@ -296,7 +317,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group"
+                className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group glow-hover"
               >
                 <div className="h-52 bg-gradient-to-br from-dcs-navy to-dcs-navy-dark relative flex items-end p-5 overflow-hidden">
                   <div className="absolute inset-0 grid-bg opacity-50" />

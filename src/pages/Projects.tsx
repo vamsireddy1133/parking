@@ -213,7 +213,7 @@ export default function Projects() {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group"
+                  className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group glow-hover"
                 >
                   {/* Image / Visual */}
                   <div className={`h-48 bg-gradient-to-br ${p.gradient} relative flex items-end p-4 overflow-hidden`}>

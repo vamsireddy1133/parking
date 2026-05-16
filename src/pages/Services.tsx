@@ -195,7 +195,7 @@ export default function Services() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-dcs-navy-light border border-white/8 rounded-2xl p-7 relative overflow-hidden group"
+                className="bg-dcs-navy-light border border-white/8 rounded-2xl p-7 relative overflow-hidden group glow-hover"
               >
                 <span className="absolute top-4 right-4 font-outfit font-black text-5xl text-white/4 select-none">
                   {p.step}

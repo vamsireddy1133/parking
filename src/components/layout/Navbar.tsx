@@ -71,7 +71,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <Link
               to="/contact"
-              className="inline-flex items-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-5 py-2.5 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-200 hover:shadow-lg hover:shadow-dcs-red/40 hover:-translate-y-0.5"
+              className="inline-flex items-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-5 py-2.5 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-200 hover:shadow-lg hover:shadow-dcs-red/40 hover:-translate-y-0.5 animate-pulse-red"
             >
               <span>Get a Quote</span>
               <ChevronRight size={15} />
