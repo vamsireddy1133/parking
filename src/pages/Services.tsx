@@ -11,6 +11,7 @@ const services = [
     icon: Car,
     color: 'from-red-500/20 to-transparent',
     iconColor: 'text-red-400',
+    image: '/s1.png',
     title: 'Parking Markings',
     tagline: 'Precision. Durability. Compliance.',
     description:
@@ -29,6 +30,7 @@ const services = [
     icon: PenTool,
     color: 'from-blue-500/20 to-transparent',
     iconColor: 'text-blue-400',
+    image: '/s2.png',
     title: 'Parking Layout Design',
     tagline: 'Space Maximised. Flow Optimised.',
     description:
@@ -47,6 +49,7 @@ const services = [
     icon: Building2,
     color: 'from-emerald-500/20 to-transparent',
     iconColor: 'text-emerald-400',
+    image: '/s3.png',
     title: 'Signage Boards',
     tagline: 'Navigate. Comply. Brand.',
     description:
@@ -65,6 +68,7 @@ const services = [
     icon: Monitor,
     color: 'from-violet-500/20 to-transparent',
     iconColor: 'text-violet-400',
+    image: '/s4.png',
     title: 'BMS Management Software',
     tagline: 'Data-Driven. Cloud-Ready. Scalable.',
     description:
@@ -164,15 +168,15 @@ export default function Services() {
               </div>
 
               {/* Visual side */}
-              <div className={`relative min-h-[320px] bg-gradient-to-br from-dcs-navy to-dcs-navy-dark flex items-center justify-center overflow-hidden`}>
-                <div className="absolute inset-0 grid-bg opacity-60" />
-                <div className={`absolute inset-0 bg-gradient-to-br ${s.color} opacity-40`} />
-                <s.icon size={140} className="relative text-white/5" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-gray-500 font-inter text-xs italic leading-relaxed">
-                    Image: {s.imageAlt}
-                  </p>
-                </div>
+              <div className="relative min-h-[320px] overflow-hidden bg-dcs-navy group/img">
+                <img
+                  src={s.image}
+                  alt={s.title}
+                  className="w-full h-full object-cover absolute inset-0 group-hover/img:scale-105 transition-transform duration-700 ease-out"
+                />
+                {/* Subtle gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${s.color} opacity-30 mix-blend-multiply`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
               </div>
             </motion.div>
           ))}
