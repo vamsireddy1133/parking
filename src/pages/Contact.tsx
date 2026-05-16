@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { MapPin, Phone, Mail, Clock, CheckCircle, ArrowRight, ChevronRight } from 'lucide-react'
+import ReCAPTCHA from 'react-google-recaptcha'
 import SectionHeader from '../components/ui/SectionHeader'
+
+// Replace with your site key from https://www.google.com/recaptcha/admin/create
+const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
 
 type Step = 1 | 2 | 3
 
@@ -99,6 +103,8 @@ function Select({ label, options, ...props }: { label: string; options: string[]
 export default function Contact() {
   const [step, setStep] = useState<Step>(1)
   const [submitted, setSubmitted] = useState(false)
+  const [captchaVerified, setCaptchaVerified] = useState(false)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
   const [form, setForm] = useState<FormData>({
     name: '', email: '', phone: '', company: '',
     service: '', projectType: '', bays: '', city: '', message: '',
@@ -112,6 +118,7 @@ export default function Contact() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    if (!captchaVerified) return
     setSubmitted(true)
   }
 
@@ -289,6 +296,15 @@ export default function Contact() {
                           <p className="text-gray-500 font-inter text-xs">
                             By submitting, you agree to be contacted by a DCS representative. We never share your data with third parties.
                           </p>
+                          <div className="flex justify-start">
+                            <ReCAPTCHA
+                              ref={recaptchaRef}
+                              sitekey={RECAPTCHA_SITE_KEY}
+                              theme="dark"
+                              onChange={(token) => setCaptchaVerified(!!token)}
+                              onExpired={() => setCaptchaVerified(false)}
+                            />
+                          </div>
                           <div className="flex gap-3">
                             <button
                               type="button"
@@ -299,7 +315,8 @@ export default function Contact() {
                             </button>
                             <button
                               type="submit"
-                              className="flex-[2] flex items-center justify-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-8 py-4 rounded-xl font-inter font-bold text-white transition-all duration-300 hover:shadow-xl hover:shadow-dcs-red/40 hover:-translate-y-0.5 shadow-lg shadow-dcs-red/20"
+                              disabled={!captchaVerified}
+                              className="flex-[2] flex items-center justify-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark disabled:opacity-50 disabled:cursor-not-allowed px-8 py-4 rounded-xl font-inter font-bold text-white transition-all duration-300 hover:shadow-xl hover:shadow-dcs-red/40 hover:-translate-y-0.5 shadow-lg shadow-dcs-red/20"
                             >
                               <span>Send Enquiry</span>
                               <ArrowRight size={16} />
