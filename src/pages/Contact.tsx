@@ -65,11 +65,13 @@ const offices = [
 
 function Input({ label, ...props }: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <div>
-      <label className="block text-gray-400 font-inter text-xs font-medium uppercase tracking-wider mb-1.5">{label}</label>
+    <div className="group/field">
+      <label className="block text-gray-300 font-inter text-xs font-semibold uppercase tracking-widest mb-2">
+        {label}
+      </label>
       <input
         {...props}
-        className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-dcs-red rounded-xl px-4 py-3 text-white font-inter text-sm placeholder-gray-600 outline-none transition-all duration-200"
+        className="w-full bg-white/8 border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:bg-dcs-red/5 focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm placeholder-gray-500 outline-none transition-all duration-200"
       />
     </div>
   )
@@ -78,10 +80,12 @@ function Input({ label, ...props }: { label: string } & React.InputHTMLAttribute
 function Select({ label, options, ...props }: { label: string; options: string[] } & React.SelectHTMLAttributes<HTMLSelectElement>) {
   return (
     <div>
-      <label className="block text-gray-400 font-inter text-xs font-medium uppercase tracking-wider mb-1.5">{label}</label>
+      <label className="block text-gray-300 font-inter text-xs font-semibold uppercase tracking-widest mb-2">
+        {label}
+      </label>
       <select
         {...props}
-        className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-dcs-red rounded-xl px-4 py-3 text-white font-inter text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
+        className="w-full bg-white/8 border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:bg-dcs-red/5 focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm outline-none transition-all duration-200 appearance-none cursor-pointer"
       >
         <option value="" className="bg-dcs-navy-dark">Select an option…</option>
         {options.map((o) => (
@@ -160,25 +164,35 @@ export default function Contact() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
-              className="lg:col-span-3 bg-dcs-navy-light border border-white/8 rounded-3xl p-8 sm:p-10"
+              className="lg:col-span-3 bg-dcs-navy-light border border-dcs-red/20 rounded-3xl p-8 sm:p-10 shadow-xl shadow-dcs-red/5 relative overflow-hidden"
             >
+              {/* Top red accent line */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-dcs-red via-orange-400 to-dcs-red rounded-t-3xl" />
               {!submitted ? (
                 <>
                   {/* Progress */}
-                  <div className="flex items-center mb-10">
+                  <div className="flex items-center mb-10 mt-4">
                     {([1, 2, 3] as Step[]).map((s, i) => (
                       <div key={s} className="flex items-center flex-1 last:flex-none">
-                        <div className={`flex items-center justify-center w-9 h-9 rounded-full font-outfit font-bold text-sm shrink-0 transition-all duration-300 ${
-                          step >= s ? 'bg-dcs-red text-white' : 'bg-white/10 text-gray-500'
+                        <div className={`flex items-center justify-center w-10 h-10 rounded-full font-outfit font-bold text-sm shrink-0 transition-all duration-300 ${
+                          step > s
+                            ? 'bg-dcs-red text-white shadow-lg shadow-dcs-red/40'
+                            : step === s
+                            ? 'bg-dcs-red text-white shadow-lg shadow-dcs-red/40 ring-4 ring-dcs-red/20'
+                            : 'bg-white/8 border border-white/20 text-gray-400'
                         }`}>
                           {step > s ? <CheckCircle size={16} /> : s}
                         </div>
-                        <div className="hidden sm:block ml-2 mr-2">
-                          <p className={`font-inter text-xs font-medium transition-colors ${step >= s ? 'text-white' : 'text-gray-600'}`}>
+                        <div className="hidden sm:block ml-2.5 mr-1">
+                          <p className={`font-inter text-xs font-semibold transition-colors ${step >= s ? 'text-white' : 'text-gray-500'}`}>
                             {stepLabels[i]}
                           </p>
                         </div>
-                        {i < 2 && <div className={`flex-1 h-px mx-2 transition-colors ${step > s ? 'bg-dcs-red' : 'bg-white/10'}`} />}
+                        {i < 2 && (
+                          <div className={`flex-1 h-0.5 mx-3 rounded-full transition-all duration-500 ${
+                            step > s ? 'bg-dcs-red' : 'bg-white/10'
+                          }`} />
+                        )}
                       </div>
                     ))}
                   </div>
@@ -196,7 +210,7 @@ export default function Contact() {
                           transition={{ duration: 0.25 }}
                           className="space-y-5"
                         >
-                          <h3 className="font-outfit font-bold text-xl text-white mb-6">Tell us about yourself</h3>
+                          <h3 className="font-outfit font-bold text-2xl text-white mb-6">Tell us about yourself</h3>
                           <Input label="Full Name *" placeholder="e.g. Ravi Shankar" value={form.name} onChange={set('name')} required />
                           <Input label="Email Address *" type="email" placeholder="ravi@company.com" value={form.email} onChange={set('email')} required />
                           <Input label="Mobile Number *" type="tel" placeholder="+91 98765 43210" value={form.phone} onChange={set('phone')} required />
@@ -205,7 +219,7 @@ export default function Contact() {
                             type="button"
                             disabled={!canProceed1}
                             onClick={() => setStep(2)}
-                            className="w-full flex items-center justify-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark disabled:opacity-40 disabled:cursor-not-allowed px-8 py-4 rounded-xl font-inter font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-dcs-red/30 mt-2"
+                            className="w-full flex items-center justify-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark disabled:opacity-50 disabled:cursor-not-allowed px-8 py-4 rounded-xl font-inter font-bold text-white text-base transition-all duration-300 hover:shadow-xl hover:shadow-dcs-red/40 hover:-translate-y-0.5 mt-2 shadow-lg shadow-dcs-red/20"
                           >
                             <span>Continue</span>
                             <ChevronRight size={18} />
@@ -223,7 +237,7 @@ export default function Contact() {
                           transition={{ duration: 0.25 }}
                           className="space-y-5"
                         >
-                          <h3 className="font-outfit font-bold text-xl text-white mb-6">Tell us about your project</h3>
+                          <h3 className="font-outfit font-bold text-2xl text-white mb-6">Tell us about your project</h3>
                           <Select label="Service Required *" options={services} value={form.service} onChange={set('service')} required />
                           <Select label="Project Type *" options={projectTypes} value={form.projectType} onChange={set('projectType')} required />
                           <Input label="Approximate Number of Bays" type="number" placeholder="e.g. 250" value={form.bays} onChange={set('bays')} />
@@ -232,7 +246,7 @@ export default function Contact() {
                             <button
                               type="button"
                               onClick={() => setStep(1)}
-                              className="flex-1 border border-white/15 hover:border-white/30 px-6 py-4 rounded-xl font-inter font-semibold text-gray-300 text-sm transition-all duration-300"
+                              className="flex-1 border border-white/20 hover:border-dcs-red/50 hover:text-white px-6 py-4 rounded-xl font-inter font-semibold text-gray-400 text-sm transition-all duration-300"
                             >
                               Back
                             </button>
@@ -240,7 +254,7 @@ export default function Contact() {
                               type="button"
                               disabled={!canProceed2}
                               onClick={() => setStep(3)}
-                              className="flex-[2] flex items-center justify-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark disabled:opacity-40 disabled:cursor-not-allowed px-8 py-4 rounded-xl font-inter font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-dcs-red/30"
+                              className="flex-[2] flex items-center justify-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark disabled:opacity-50 disabled:cursor-not-allowed px-8 py-4 rounded-xl font-inter font-bold text-white transition-all duration-300 hover:shadow-xl hover:shadow-dcs-red/40 hover:-translate-y-0.5 shadow-lg shadow-dcs-red/20"
                             >
                               <span>Continue</span>
                               <ChevronRight size={18} />
@@ -259,9 +273,9 @@ export default function Contact() {
                           transition={{ duration: 0.25 }}
                           className="space-y-5"
                         >
-                          <h3 className="font-outfit font-bold text-xl text-white mb-6">Anything else to share?</h3>
+                          <h3 className="font-outfit font-bold text-2xl text-white mb-6">Anything else to share?</h3>
                           <div>
-                            <label className="block text-gray-400 font-inter text-xs font-medium uppercase tracking-wider mb-1.5">
+                            <label className="block text-gray-300 font-inter text-xs font-semibold uppercase tracking-widest mb-2">
                               Your Message
                             </label>
                             <textarea
@@ -269,7 +283,7 @@ export default function Contact() {
                               placeholder="Describe your site, timeline, specific challenges, or any questions you have…"
                               value={form.message}
                               onChange={set('message')}
-                              className="w-full bg-white/5 border border-white/10 hover:border-white/20 focus:border-dcs-red rounded-xl px-4 py-3 text-white font-inter text-sm placeholder-gray-600 outline-none transition-all duration-200 resize-none"
+                              className="w-full bg-white/8 border border-white/20 hover:border-dcs-red/60 focus:border-dcs-red focus:bg-dcs-red/5 focus:shadow-[0_0_0_3px_rgba(227,30,36,0.15)] rounded-xl px-4 py-3.5 text-white font-inter text-sm placeholder-gray-500 outline-none transition-all duration-200 resize-none"
                             />
                           </div>
                           <p className="text-gray-500 font-inter text-xs">
@@ -279,13 +293,13 @@ export default function Contact() {
                             <button
                               type="button"
                               onClick={() => setStep(2)}
-                              className="flex-1 border border-white/15 hover:border-white/30 px-6 py-4 rounded-xl font-inter font-semibold text-gray-300 text-sm transition-all"
+                              className="flex-1 border border-white/20 hover:border-dcs-red/50 hover:text-white px-6 py-4 rounded-xl font-inter font-semibold text-gray-400 text-sm transition-all"
                             >
                               Back
                             </button>
                             <button
                               type="submit"
-                              className="flex-[2] flex items-center justify-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-8 py-4 rounded-xl font-inter font-semibold text-white transition-all duration-300 hover:shadow-lg hover:shadow-dcs-red/30"
+                              className="flex-[2] flex items-center justify-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-8 py-4 rounded-xl font-inter font-bold text-white transition-all duration-300 hover:shadow-xl hover:shadow-dcs-red/40 hover:-translate-y-0.5 shadow-lg shadow-dcs-red/20"
                             >
                               <span>Send Enquiry</span>
                               <ArrowRight size={16} />
