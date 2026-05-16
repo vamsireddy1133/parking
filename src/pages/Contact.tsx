@@ -5,7 +5,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import SectionHeader from '../components/ui/SectionHeader'
 
 // Replace with your site key from https://www.google.com/recaptcha/admin/create
-const RECAPTCHA_SITE_KEY = '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+const RECAPTCHA_SITE_KEY = '6LcywewsAAAAAGcRW1PMY9P_5WGbv4BemjgZBwY9'
 
 type Step = 1 | 2 | 3
 
