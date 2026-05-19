@@ -44,25 +44,9 @@ const offices = [
   {
     city: 'Hyderabad',
     label: 'Headquarters',
-    address: 'Plot No. 12, Cyber Hills Colony, Madhapur, Hyderabad — 500081',
-    phone: '+91 98765 43210',
-    email: 'hyd@dcshyd.com',
-    hours: 'Mon–Sat, 9 AM – 6 PM',
-  },
-  {
-    city: 'Bengaluru',
-    label: 'South Office',
-    address: '3rd Floor, Gopalan Innovation Mall, Whitefield, Bengaluru — 560066',
-    phone: '+91 90001 11222',
-    email: 'blr@dcshyd.com',
-    hours: 'Mon–Sat, 9 AM – 6 PM',
-  },
-  {
-    city: 'Chennai',
-    label: 'East Office',
-    address: 'No. 7, GST Road, Guindy Industrial Estate, Chennai — 600032',
-    phone: '+91 90001 33444',
-    email: 'chn@dcshyd.com',
+    address: '6-144, Durga Estates, Road No. 3, Deepthisri Nagar, Madinaguda, Hyderabad — 500049',
+    phone: '+91 80080 69 888',
+    email: 'sales@dcshyd.com',
     hours: 'Mon–Sat, 9 AM – 6 PM',
   },
 ]
@@ -360,8 +344,8 @@ export default function Contact() {
               <div className="bg-dcs-navy-light border border-white/8 rounded-2xl p-6 space-y-5">
                 <h3 className="font-outfit font-bold text-lg text-white">Direct Contact</h3>
                 {[
-                  { icon: Phone, label: 'Call Us',   value: '+91 98765 43210', href: 'tel:+919876543210' },
-                  { icon: Mail,  label: 'Email Us',  value: 'info@dcshyd.com', href: 'mailto:info@dcshyd.com' },
+                  { icon: Phone, label: 'Call Us',   value: '+91 80080 69 888', href: 'tel:+918008069888' },
+                  { icon: Mail,  label: 'Email Us',  value: 'sales@dcshyd.com', href: 'mailto:sales@dcshyd.com' },
                   { icon: Clock, label: 'Hours',     value: 'Mon–Sat, 9 AM – 6 PM', href: undefined },
                 ].map((item) => (
                   <div key={item.label} className="flex items-start space-x-4">
@@ -386,8 +370,8 @@ export default function Contact() {
                   <div className="absolute inset-0 grid-bg opacity-40" />
                   <div className="relative text-center">
                     <MapPin size={32} className="text-dcs-red mx-auto mb-2" />
-                    <p className="text-gray-400 font-inter text-sm">Cyber Hills Colony, Madhapur</p>
-                    <p className="text-gray-500 font-inter text-xs">Hyderabad, Telangana 500081</p>
+                    <p className="text-gray-400 font-inter text-sm">Deepthisri Nagar, Madinaguda</p>
+                    <p className="text-gray-500 font-inter text-xs">Hyderabad, Telangana 500049</p>
                   </div>
                   <div className="absolute bottom-3 left-0 right-0 text-center">
                     <span className="text-gray-600 font-inter text-xs italic">Interactive map — Google Maps embed</span>

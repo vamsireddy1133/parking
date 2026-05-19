@@ -218,12 +218,11 @@ export default function About() {
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-dcs-navy border-y border-white/5">
         <div className="max-w-7xl mx-auto">
           <SectionHeader badge="Our Presence" title="Operating Across South India" subtitle="Four offices, one standard of service." />
-          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { city: 'Hyderabad', state: 'Telangana', label: 'Headquarters', address: 'Cyber Hills Colony, HYD 500081' },
-              { city: 'Bengaluru', state: 'Karnataka', label: 'South Office', address: 'Whitefield, BLR 560066' },
-              { city: 'Chennai',   state: 'Tamil Nadu', label: 'East Office',  address: 'Guindy Industrial Estate, CHN 600032' },
-              { city: 'Visakhapatnam', state: 'Andhra Pradesh', label: 'Coastal Office', address: 'MVP Colony, VZG 530017' },
+              { city: 'Hyderabad', state: 'Telangana', label: 'Headquarters', address: '6-144, Durga Estates, Road No. 3, Deepthisri Nagar, Madinaguda — 500049' },
+              { city: 'Phone', state: '+91 80080 69 888', label: 'Call Us', address: 'Mon–Sat, 9 AM – 6 PM' },
+              { city: 'Email', state: 'sales@dcshyd.com', label: 'Write to Us', address: 'We respond within 4 working hours' },
             ].map((loc, i) => (
               <motion.div
                 key={loc.city}

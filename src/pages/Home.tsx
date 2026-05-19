@@ -80,39 +80,39 @@ const services = [
 
 const projects = [
   {
-    title: 'Prestige Tech Park',
+    title: 'Salarpuria Satva Knowledge Park',
     category: 'Commercial',
-    description: 'Multi-level parking structure with 840 bays — full epoxy marking, reflective signage, and live BMS dashboard.',
+    description: 'Multi-level basement parking with epoxy slot markings, column numbering, retroreflective signage, and traffic flow design.',
     badge: 'bg-blue-500/20 text-blue-300',
     image: '/p1.png',
   },
   {
-    title: 'Hetero Pharma GMP Plant',
-    category: 'Industrial',
-    description: 'HFL-rated reflective zone markings and hazard signage across a 12-acre manufacturing campus in Jeedimetla.',
-    badge: 'bg-orange-500/20 text-orange-300',
+    title: 'MyHome Bhooja',
+    category: 'Residential',
+    description: 'Premium residential tower with colour-coded zone markings, pillar numbering, visitor bay management, and smart parking allocation.',
+    badge: 'bg-emerald-500/20 text-emerald-300',
     image: '/p2.png',
   },
   {
-    title: 'My Home Jewel Residences',
-    category: 'Residential',
-    description: 'Premium apartment complex with color-coded visitor zones, pillar numbering system, and 24/7 management software.',
-    badge: 'bg-emerald-500/20 text-emerald-300',
+    title: 'Phoenix Centarus',
+    category: 'Commercial',
+    description: 'End-to-end parking solution with epoxy markings, LED wayfinding signage, EV charging bays, and FASTag-integrated billing.',
+    badge: 'bg-blue-500/20 text-blue-300',
     image: '/p3.png',
   },
 ]
 
 const testimonials = [
   {
-    name: 'Arun Sharma',
-    role: 'Facilities Manager, Prestige Group',
-    text: 'DCS transformed our chaotic parking situation into a model facility. The epoxy markings are still perfect three years on. Highly recommended.',
+    name: 'Facilities Manager',
+    role: 'Salarpuria Satva Knowledge Park',
+    text: 'DCS transformed our parking facility completely. The epoxy markings and signage are top quality and the team delivered on time without any issues.',
     avatar: '/testimonial-1.jpg',
   },
   {
-    name: 'Priya Nair',
-    role: 'Project Head, My Home Jewel',
-    text: 'Their BMS software has reduced parking disputes by 80%. The team was professional, on-time, and delivered exactly what they promised.',
+    name: 'Project Head',
+    role: 'MyHome Bhooja, Kokapet',
+    text: 'The colour-coded zone system and pillar numbering have eliminated parking confusion for our residents entirely. Professional team, excellent output.',
     avatar: '/testimonial-2.jpg',
   },
 ]

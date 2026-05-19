@@ -1,12 +1,18 @@
 import { Link } from 'react-router-dom'
-import { MapPin, Phone, Mail, Linkedin, Instagram, Facebook } from 'lucide-react'
+import { MapPin, Phone, Mail, Instagram, Facebook, Youtube } from 'lucide-react'
 
-const services = ['Parking Markings', 'Layout Design', 'Signage Boards', 'BMS Software']
+const services = ['Floor Marking & Painting', 'Parking Safety Items', 'Consulting & Layout Design', 'Sign Boards', 'Entry Exit Systems', 'Smart Parking']
 const quickLinks = [
   { name: 'About Us', path: '/about' },
   { name: 'Projects', path: '/projects' },
   { name: 'Careers',  path: '/careers' },
   { name: 'Contact',  path: '/contact' },
+]
+
+const socials = [
+  { Icon: Facebook,  href: 'https://facebook.com/DcsParksols',      label: 'Facebook' },
+  { Icon: Instagram, href: 'https://instagram.com/dcsparksols',     label: 'Instagram' },
+  { Icon: Youtube,   href: 'https://youtube.com/@dcsparksols',      label: 'YouTube' },
 ]
 
 export default function Footer() {
@@ -25,15 +31,17 @@ export default function Footer() {
               />
             </Link>
             <p className="text-gray-400 font-inter text-sm leading-relaxed mb-6">
-              Durga Consulting Services — South India's trusted partner for end-to-end parking infrastructure since 2015.
+              Durga Consulting Services — Hyderabad's trusted partner for end-to-end parking infrastructure solutions.
             </p>
             <div className="flex space-x-3">
-              {[Linkedin, Instagram, Facebook].map((Icon, i) => (
+              {socials.map(({ Icon, href, label }) => (
                 <a
-                  key={i}
-                  href="#"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
                   className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-dcs-red hover:border-dcs-red transition-all duration-200"
-                  aria-label="Social link"
+                  aria-label={label}
                 >
                   <Icon size={16} />
                 </a>
@@ -78,20 +86,21 @@ export default function Footer() {
               <li className="flex items-start space-x-3 text-sm">
                 <MapPin size={16} className="text-dcs-red mt-0.5 shrink-0" />
                 <span className="text-gray-400 font-inter leading-relaxed">
-                  Plot No. 12, Cyber Hills Colony,<br />
-                  Hyderabad, Telangana — 500081
+                  6-144, Durga Estates, Road No. 3,<br />
+                  Deepthisri Nagar, Madinaguda,<br />
+                  Hyderabad — 500049
                 </span>
               </li>
               <li className="flex items-center space-x-3 text-sm">
                 <Phone size={16} className="text-dcs-red shrink-0" />
-                <a href="tel:+919876543210" className="text-gray-400 hover:text-white font-inter transition-colors">
-                  +91 98765 43210
+                <a href="tel:+918008069888" className="text-gray-400 hover:text-white font-inter transition-colors">
+                  +91 80080 69 888
                 </a>
               </li>
               <li className="flex items-center space-x-3 text-sm">
                 <Mail size={16} className="text-dcs-red shrink-0" />
-                <a href="mailto:info@dcshyd.com" className="text-gray-400 hover:text-white font-inter transition-colors">
-                  info@dcshyd.com
+                <a href="mailto:sales@dcshyd.com" className="text-gray-400 hover:text-white font-inter transition-colors">
+                  sales@dcshyd.com
                 </a>
               </li>
             </ul>
@@ -101,7 +110,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-14 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 font-inter text-sm">
-            © {new Date().getFullYear()} DCS Parking Solutions (Durga Consulting Services). All rights reserved.
+            © {new Date().getFullYear()} Durga Consulting Services. All rights reserved.
           </p>
           <div className="flex items-center space-x-6">
             <a href="#" className="text-gray-500 hover:text-gray-300 font-inter text-xs transition-colors">Privacy Policy</a>
