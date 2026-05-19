@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, MapPin, Building2, Home, Heart, Car, PenTool, Monitor, Shield } from 'lucide-react'
+import { ArrowRight, MapPin, Building2, Home, Heart, ChevronDown } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
 type Category = 'All' | 'Commercial' | 'Residential' | 'Healthcare'
@@ -141,7 +141,11 @@ const categoryBadge: Record<Category, string> = {
 
 export default function Projects() {
   const [active, setActive] = useState<Category>('All')
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
+
+  const toggleExpand = (i: number) =>
+    setExpandedIndex((prev) => (prev === i ? null : i))
 
   return (
     <div className="bg-dcs-navy-dark">
@@ -210,54 +214,133 @@ export default function Projects() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             >
-              {filtered.map((p, i) => (
-                <motion.div
-                  key={p.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="rounded-2xl overflow-hidden border border-white/8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 group glow-hover"
-                >
-                  {/* Card Header — gradient + icon + bays */}
-                  <div className={`bg-gradient-to-br ${p.headerBg} p-6 relative overflow-hidden`}>
-                    <div className="absolute inset-0 grid-bg opacity-30" />
-                    <div className="relative flex items-start justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-white/8 border border-white/15 flex items-center justify-center">
-                        <p.icon size={22} className={p.accent} />
-                      </div>
-                      <div className="text-right">
-                        <p className={`font-outfit font-black text-3xl ${p.accent}`}>{p.bays}</p>
-                        <p className="text-gray-400 font-inter text-xs uppercase tracking-wider">Bays</p>
-                      </div>
-                    </div>
-                    <div className="relative mt-5 flex items-center justify-between">
-                      <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border ${categoryBadge[p.category]}`}>
-                        {p.category}
-                      </span>
-                      <span className="text-gray-500 font-inter text-xs">{p.year}</span>
-                    </div>
-                  </div>
+              {/* ── Mobile: accordion list ── */}
+              <div className="md:hidden space-y-3">
+                {filtered.map((p, i) => {
+                  const isOpen = expandedIndex === i
+                  return (
+                    <motion.div
+                      key={p.title}
+                      initial={{ opacity: 0, y: 16 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: i * 0.04 }}
+                      className="rounded-2xl overflow-hidden border border-white/8 bg-dcs-navy-light"
+                    >
+                      {/* Compact row — always visible */}
+                      <button
+                        onClick={() => toggleExpand(i)}
+                        className="w-full flex items-center justify-between px-4 py-4 text-left"
+                      >
+                        <div className="flex items-center space-x-3 min-w-0">
+                          <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${p.headerBg} border border-white/10 flex items-center justify-center shrink-0`}>
+                            <p.icon size={16} className={p.accent} />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="font-outfit font-bold text-white text-sm leading-tight truncate">{p.title}</p>
+                            <div className="flex items-center space-x-1 mt-0.5">
+                              <MapPin size={10} className="text-gray-500 shrink-0" />
+                              <span className="text-gray-500 font-inter text-xs truncate">{p.location}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2 shrink-0 ml-2">
+                          <span className={`text-xs font-inter font-semibold px-2 py-0.5 rounded-full border hidden sm:inline ${categoryBadge[p.category]}`}>
+                            {p.category}
+                          </span>
+                          <ChevronDown
+                            size={18}
+                            className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                          />
+                        </div>
+                      </button>
 
-                  {/* Content */}
-                  <div className="bg-dcs-navy-light p-6">
-                    <h3 className="font-outfit font-bold text-lg text-white leading-tight mb-1">{p.title}</h3>
-                    <div className="flex items-center space-x-1 mb-3">
-                      <MapPin size={12} className="text-gray-500" />
-                      <span className="text-gray-500 font-inter text-xs">{p.location}</span>
-                    </div>
-                    <p className="text-gray-400 font-inter text-sm leading-relaxed mb-4">{p.desc}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {p.services.map((svc) => (
-                        <span key={svc} className="text-xs font-inter text-gray-400 bg-white/5 border border-white/8 px-2.5 py-1 rounded-full">
-                          {svc}
+                      {/* Expanded details */}
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                            className="overflow-hidden"
+                          >
+                            <div className={`bg-gradient-to-br ${p.headerBg} px-4 py-4 relative`}>
+                              <div className="absolute inset-0 grid-bg opacity-20" />
+                              <div className="relative flex items-center justify-between">
+                                <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border ${categoryBadge[p.category]}`}>
+                                  {p.category}
+                                </span>
+                                <div className="text-right">
+                                  <span className={`font-outfit font-black text-2xl ${p.accent}`}>{p.bays}</span>
+                                  <span className="text-gray-400 font-inter text-xs ml-1">bays · {p.year}</span>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="px-4 py-4 border-t border-white/5">
+                              <p className="text-gray-400 font-inter text-sm leading-relaxed mb-3">{p.desc}</p>
+                              <div className="flex flex-wrap gap-1.5">
+                                {p.services.map((svc) => (
+                                  <span key={svc} className="text-xs font-inter text-gray-400 bg-white/5 border border-white/8 px-2.5 py-1 rounded-full">
+                                    {svc}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  )
+                })}
+              </div>
+
+              {/* ── Desktop: grid cards ── */}
+              <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filtered.map((p, i) => (
+                  <motion.div
+                    key={p.title}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: i * 0.06 }}
+                    className="rounded-2xl overflow-hidden border border-white/8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 group glow-hover"
+                  >
+                    <div className={`bg-gradient-to-br ${p.headerBg} p-6 relative overflow-hidden`}>
+                      <div className="absolute inset-0 grid-bg opacity-30" />
+                      <div className="relative flex items-start justify-between">
+                        <div className="w-12 h-12 rounded-xl bg-white/8 border border-white/15 flex items-center justify-center">
+                          <p.icon size={22} className={p.accent} />
+                        </div>
+                        <div className="text-right">
+                          <p className={`font-outfit font-black text-3xl ${p.accent}`}>{p.bays}</p>
+                          <p className="text-gray-400 font-inter text-xs uppercase tracking-wider">Bays</p>
+                        </div>
+                      </div>
+                      <div className="relative mt-5 flex items-center justify-between">
+                        <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border ${categoryBadge[p.category]}`}>
+                          {p.category}
                         </span>
-                      ))}
+                        <span className="text-gray-500 font-inter text-xs">{p.year}</span>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+                    <div className="bg-dcs-navy-light p-6">
+                      <h3 className="font-outfit font-bold text-lg text-white leading-tight mb-1">{p.title}</h3>
+                      <div className="flex items-center space-x-1 mb-3">
+                        <MapPin size={12} className="text-gray-500" />
+                        <span className="text-gray-500 font-inter text-xs">{p.location}</span>
+                      </div>
+                      <p className="text-gray-400 font-inter text-sm leading-relaxed mb-4">{p.desc}</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {p.services.map((svc) => (
+                          <span key={svc} className="text-xs font-inter text-gray-400 bg-white/5 border border-white/8 px-2.5 py-1 rounded-full">
+                            {svc}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
           </AnimatePresence>
         </div>
