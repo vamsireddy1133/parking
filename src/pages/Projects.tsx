@@ -1,207 +1,19 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, ChevronDown, Building2, Home, Heart, GraduationCap, UtensilsCrossed } from 'lucide-react'
+import { ArrowRight, ArrowUpRight } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
+import { clients, categoryStyle } from '../data/clients'
+import type { Category } from '../data/clients'
 
-type Category = 'All' | 'Commercial' | 'Residential' | 'Healthcare' | 'Hospitality' | 'Education'
+type Filter = 'All' | Category
 
-interface ClientGroup {
-  id: string
-  name: string
-  category: Category
-  projects: string[]
-}
-
-const clients: ClientGroup[] = [
-  {
-    id: 'salarpuria',
-    name: 'Salarpuria Satva',
-    category: 'Commercial',
-    projects: [
-      'Salarpuria Satva Knowledge Park',
-      'Salarpuria Satva Knowledge Capital',
-      'Salarpuria Satva Knowledge City',
-      'Salarpuria Satva Necklace Pride Mall',
-      'Salarpuria Satva Signature Tower',
-      'Salarpuria Satva Magnus',
-    ],
-  },
-  {
-    id: 'myhome',
-    name: 'MyHome',
-    category: 'Residential',
-    projects: [
-      'MyHome Bhooja',
-      'MyHome Twitza',
-      'MyHome Tarkshya',
-      'MyHome Tridasa',
-      'MyHome Skyview',
-      'MyHome Mangala',
-      'MyHome Ankura',
-      'MyHome Raka',
-      'MyHome Nishida',
-    ],
-  },
-  {
-    id: 'phoenix',
-    name: 'Phoenix Group',
-    category: 'Commercial',
-    projects: [
-      'Phoenix Centarus',
-      'Phoenix Litho',
-      'Phoenix Aquila',
-      'Phoenix Ivy',
-      'Phoenix H10',
-    ],
-  },
-  {
-    id: 'rajapushpa',
-    name: 'Rajapushpa',
-    category: 'Residential',
-    projects: [
-      'Rajapushpa Summit',
-      'Rajapushpa Paradium',
-      'Rajapushpa Provencia',
-    ],
-  },
-  {
-    id: 'smr',
-    name: 'SMR',
-    category: 'Residential',
-    projects: [
-      'SMR Casa Carino Villas',
-      'SMR Iconia',
-    ],
-  },
-  {
-    id: 'aurobindo',
-    name: 'Aurobindo',
-    category: 'Residential',
-    projects: [
-      'Aurobindo Galaxy',
-      'Aurobindo Orbit',
-    ],
-  },
-  {
-    id: 'asbl',
-    name: 'ASBL',
-    category: 'Residential',
-    projects: [
-      'ASBL Lakeside',
-      'ASBL Spire',
-    ],
-  },
-  {
-    id: 'amazon',
-    name: 'Amazon',
-    category: 'Commercial',
-    projects: ['Amazon Hyderabad Campus'],
-  },
-  {
-    id: 'google',
-    name: 'Google',
-    category: 'Commercial',
-    projects: ['Google Hyderabad Office'],
-  },
-  {
-    id: 'raheja',
-    name: 'Raheja Mindspace',
-    category: 'Commercial',
-    projects: ['Raheja Mindspace IT Park'],
-  },
-  {
-    id: 'capitaland',
-    name: 'Capitaland',
-    category: 'Commercial',
-    projects: ['Capitaland'],
-  },
-  {
-    id: 'jpmc',
-    name: 'JPMC',
-    category: 'Commercial',
-    projects: ['JPMC'],
-  },
-  {
-    id: 'pranava',
-    name: 'Pranava Group',
-    category: 'Commercial',
-    projects: ['Pranava Group'],
-  },
-  {
-    id: 'gsquare',
-    name: 'GSquare',
-    category: 'Commercial',
-    projects: ['GSquare'],
-  },
-  {
-    id: 'simplywork',
-    name: 'Simply Work',
-    category: 'Commercial',
-    projects: ['Simply Work'],
-  },
-  {
-    id: 'kurnool',
-    name: 'Kurnool TG Mall',
-    category: 'Commercial',
-    projects: ['Kurnool TG Mall'],
-  },
-  {
-    id: 'sriaditya',
-    name: 'Sri Aditya',
-    category: 'Residential',
-    projects: ['Sri Aditya'],
-  },
-  {
-    id: 'hrmani',
-    name: 'Hrmani',
-    category: 'Residential',
-    projects: ['Hrmani'],
-  },
-  {
-    id: 'sindhu',
-    name: 'Sindhu Hospitals',
-    category: 'Healthcare',
-    projects: ['Sindhu Hospitals'],
-  },
-  {
-    id: 'jubilee',
-    name: 'Jubilee Hills Club',
-    category: 'Hospitality',
-    projects: ['Jubilee Hills Club'],
-  },
-  {
-    id: 'filmnagar',
-    name: 'Filmnagar Club',
-    category: 'Hospitality',
-    projects: ['Filmnagar Club'],
-  },
-  {
-    id: 'meru',
-    name: 'Meru International School',
-    category: 'Education',
-    projects: ['Meru International School'],
-  },
-]
-
-const categories: Category[] = ['All', 'Commercial', 'Residential', 'Healthcare', 'Hospitality', 'Education']
-
-const categoryStyle: Record<Category, { badge: string; icon: React.ElementType; accent: string; grad: string }> = {
-  All:         { badge: '', icon: Building2, accent: 'text-gray-300', grad: 'from-gray-800/60 to-dcs-navy' },
-  Commercial:  { badge: 'bg-blue-500/15 text-blue-300 border-blue-500/30',    icon: Building2,        accent: 'text-blue-300',   grad: 'from-blue-900/50 to-dcs-navy' },
-  Residential: { badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30', icon: Home,        accent: 'text-emerald-300', grad: 'from-emerald-900/50 to-dcs-navy' },
-  Healthcare:  { badge: 'bg-red-500/15 text-red-300 border-red-500/30',       icon: Heart,            accent: 'text-red-300',    grad: 'from-red-900/50 to-dcs-navy' },
-  Hospitality: { badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30', icon: UtensilsCrossed,  accent: 'text-amber-300',  grad: 'from-amber-900/50 to-dcs-navy' },
-  Education:   { badge: 'bg-purple-500/15 text-purple-300 border-purple-500/30', icon: GraduationCap, accent: 'text-purple-300', grad: 'from-purple-900/50 to-dcs-navy' },
-}
+const filters: Filter[] = ['All', 'Commercial', 'Residential', 'Healthcare', 'Hospitality', 'Education']
 
 export default function Projects() {
-  const [active, setActive] = useState<Category>('All')
-  const [expanded, setExpanded] = useState<string | null>(null)
+  const [active, setActive] = useState<Filter>('All')
 
   const filtered = active === 'All' ? clients : clients.filter((c) => c.category === active)
-
-  const toggle = (id: string) => setExpanded((prev) => (prev === id ? null : id))
 
   return (
     <div className="bg-dcs-navy-dark">
@@ -243,10 +55,10 @@ export default function Projects() {
       <section className="px-4 sm:px-6 lg:px-8 pb-12">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-wrap items-center justify-center gap-2">
-            {categories.map((cat) => (
+            {filters.map((cat) => (
               <button
                 key={cat}
-                onClick={() => { setActive(cat); setExpanded(null) }}
+                onClick={() => setActive(cat)}
                 className={`px-5 py-2 rounded-full font-inter font-medium text-sm transition-all duration-200 border ${
                   active === cat
                     ? 'bg-dcs-red border-dcs-red text-white shadow-lg shadow-dcs-red/30'
@@ -275,7 +87,6 @@ export default function Projects() {
               {filtered.map((client, i) => {
                 const style = categoryStyle[client.category]
                 const Icon = style.icon
-                const isOpen = expanded === client.id
 
                 return (
                   <motion.div
@@ -283,61 +94,37 @@ export default function Projects() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.35, delay: i * 0.04 }}
-                    className={`rounded-2xl overflow-hidden border transition-all duration-300 cursor-pointer ${
-                      isOpen
-                        ? 'border-dcs-red/50 shadow-lg shadow-dcs-red/10'
-                        : 'border-white/8 hover:border-white/20'
-                    } bg-dcs-navy-light`}
-                    onClick={() => toggle(client.id)}
                   >
-                    {/* Card header */}
-                    <div className={`bg-gradient-to-br ${style.grad} p-5`}>
-                      <div className="flex items-center justify-between">
-                        <div className={`w-10 h-10 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center`}>
-                          <Icon size={18} className={style.accent} />
-                        </div>
-                        <ChevronDown
-                          size={18}
-                          className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-                        />
-                      </div>
-                      <div className="mt-4">
-                        <h3 className="font-outfit font-bold text-lg text-white leading-tight">{client.name}</h3>
-                        <div className="flex items-center justify-between mt-2">
-                          <span className={`text-xs font-inter font-semibold px-2.5 py-1 rounded-full border ${style.badge}`}>
-                            {client.category}
-                          </span>
-                          <span className="text-gray-500 font-inter text-xs">
-                            {client.projects.length} {client.projects.length === 1 ? 'project' : 'projects'}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Expanded project list */}
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: 'auto', opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeInOut' }}
-                          className="overflow-hidden"
-                        >
-                          <div className="px-5 py-4 border-t border-white/8">
-                            <p className="text-gray-500 font-inter text-xs uppercase tracking-wider mb-3">Projects</p>
-                            <ul className="space-y-2">
-                              {client.projects.map((proj) => (
-                                <li key={proj} className="flex items-start space-x-2.5">
-                                  <div className="w-1.5 h-1.5 rounded-full bg-dcs-red mt-1.5 shrink-0" />
-                                  <span className="text-gray-300 font-inter text-sm leading-snug">{proj}</span>
-                                </li>
-                              ))}
-                            </ul>
+                    <Link
+                      to={`/clients/${client.id}`}
+                      className="block rounded-2xl overflow-hidden border border-white/8 hover:border-dcs-red/50 hover:shadow-lg hover:shadow-dcs-red/10 transition-all duration-300 hover:-translate-y-1 group"
+                    >
+                      {/* Gradient header */}
+                      <div className={`bg-gradient-to-br ${style.grad} p-5`}>
+                        <div className="flex items-center justify-between">
+                          <div className="w-10 h-10 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center">
+                            <Icon size={18} className={style.accent} />
                           </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
+                          <ArrowUpRight
+                            size={18}
+                            className="text-gray-500 group-hover:text-white transition-colors duration-200"
+                          />
+                        </div>
+                        <div className="mt-4">
+                          <h3 className="font-outfit font-bold text-lg text-white leading-tight group-hover:text-white">
+                            {client.name}
+                          </h3>
+                          <div className="flex items-center justify-between mt-2">
+                            <span className={`text-xs font-inter font-semibold px-2.5 py-1 rounded-full border ${style.badge}`}>
+                              {client.category}
+                            </span>
+                            <span className="text-gray-500 font-inter text-xs">
+                              {client.projects.length} {client.projects.length === 1 ? 'project' : 'projects'}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
                   </motion.div>
                 )
               })}
@@ -346,7 +133,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* ── Stats Banner ── */}
+      {/* ── Stats ── */}
       <section className="bg-dcs-navy border-y border-white/5 py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
