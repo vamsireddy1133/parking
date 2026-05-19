@@ -207,52 +207,46 @@ export default function Services() {
             })}
           </div>
 
-          {/* ── Desktop: full alternating layout ── */}
-          <div className="hidden lg:block space-y-8">
+          {/* ── Desktop: full-width text cards ── */}
+          <div className="hidden lg:block space-y-6">
             {services.map((s, i) => (
               <motion.div
                 key={s.title}
-                initial={{ opacity: 0, y: 32 }}
+                initial={{ opacity: 0, y: 28 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.55, delay: i * 0.05 }}
                 viewport={{ once: true }}
-                className={`grid grid-cols-2 gap-0 rounded-3xl overflow-hidden border border-white/8 ${i % 2 === 1 ? '[&>*:first-child]:order-2' : ''}`}
+                className="bg-dcs-navy-light border border-white/8 rounded-3xl overflow-hidden hover:border-white/16 transition-colors duration-300"
               >
-                {/* Text side */}
-                <div className="bg-dcs-navy-light p-14 flex flex-col justify-center">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} border border-white/10 flex items-center justify-center mb-6`}>
-                    <s.icon size={26} className={s.iconColor} />
+                <div className={`h-1 bg-gradient-to-r ${s.color}`} />
+                <div className="p-10 grid grid-cols-5 gap-10 items-start">
+                  {/* Left: icon + title */}
+                  <div className="col-span-2 flex items-start space-x-5">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} border border-white/10 flex items-center justify-center shrink-0 mt-1`}>
+                      <s.icon size={26} className={s.iconColor} />
+                    </div>
+                    <div>
+                      <p className="text-gray-400 font-inter text-xs font-semibold uppercase tracking-widest mb-1">{s.tagline}</p>
+                      <h2 className="font-outfit font-black text-2xl text-white leading-tight mb-3">{s.title}</h2>
+                      <p className="text-gray-400 font-inter text-sm leading-relaxed">{s.description}</p>
+                      <Link
+                        to="/contact"
+                        className="inline-flex items-center space-x-2 mt-6 bg-dcs-red hover:bg-dcs-red-dark px-5 py-2.5 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-dcs-red/30"
+                      >
+                        <span>Enquire Now</span>
+                        <ArrowRight size={14} />
+                      </Link>
+                    </div>
                   </div>
-                  <p className="text-dcs-red font-inter text-xs font-semibold uppercase tracking-widest mb-2">{s.tagline}</p>
-                  <h2 className="font-outfit font-black text-3xl text-white mb-4">{s.title}</h2>
-                  <p className="text-gray-400 font-inter text-sm leading-relaxed mb-8">{s.description}</p>
-                  <ul className="space-y-3">
+                  {/* Right: benefits */}
+                  <ul className="col-span-3 grid grid-cols-2 gap-x-8 gap-y-3">
                     {s.benefits.map((b) => (
-                      <li key={b} className="flex items-start space-x-3">
-                        <CheckCircle size={16} className="text-dcs-red mt-0.5 shrink-0" />
+                      <li key={b} className="flex items-start space-x-2.5">
+                        <CheckCircle size={15} className="text-dcs-red mt-0.5 shrink-0" />
                         <span className="text-gray-300 font-inter text-sm leading-relaxed">{b}</span>
                       </li>
                     ))}
                   </ul>
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center space-x-2 mt-8 bg-dcs-red hover:bg-dcs-red-dark px-6 py-3 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-dcs-red/30 self-start"
-                  >
-                    <span>Get a Quote</span>
-                    <ArrowRight size={15} />
-                  </Link>
-                </div>
-
-                {/* Visual side */}
-                <div className={`relative bg-gradient-to-br ${s.color} bg-dcs-navy flex items-center justify-center p-10`}>
-                  <div className="absolute inset-0 grid-bg opacity-40" />
-                  <div className="relative text-center">
-                    <div className={`w-24 h-24 rounded-3xl bg-gradient-to-br ${s.color} border border-white/15 flex items-center justify-center mx-auto mb-6 animate-float`}>
-                      <s.icon size={44} className={s.iconColor} />
-                    </div>
-                    <p className={`font-outfit font-black text-2xl ${s.iconColor} mb-1`}>{s.title}</p>
-                    <p className="text-gray-400 font-inter text-sm">{s.tagline}</p>
-                  </div>
                 </div>
               </motion.div>
             ))}
