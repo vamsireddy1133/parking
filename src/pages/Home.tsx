@@ -187,7 +187,7 @@ export default function Home() {
               <ArrowRight size={18} />
             </Link>
             <Link
-              to="/projects"
+              to="/clients"
               className="flex items-center space-x-2 border border-white/20 hover:border-white/40 px-8 py-4 rounded-xl font-inter font-semibold text-white transition-all duration-300 hover:bg-white/5"
             >
               <span>View Our Work</span>
@@ -342,10 +342,10 @@ export default function Home() {
           </div>
           <div className="text-center mt-10">
             <Link
-              to="/projects"
+              to="/clients"
               className="inline-flex items-center space-x-2 border border-white/20 hover:border-dcs-red hover:text-dcs-red px-8 py-3 rounded-xl font-inter font-semibold text-white text-sm transition-all duration-300"
             >
-              <span>View All Projects</span>
+              <span>View All Clients</span>
               <ArrowRight size={16} />
             </Link>
           </div>

@@ -4,7 +4,7 @@ import { MapPin, Phone, Mail, Instagram, Facebook, Youtube } from 'lucide-react'
 const services = ['Floor Marking & Painting', 'Parking Safety Items', 'Consulting & Layout Design', 'Sign Boards', 'Entry Exit Systems', 'Smart Parking']
 const quickLinks = [
   { name: 'About Us', path: '/about' },
-  { name: 'Projects', path: '/projects' },
+  { name: 'Clients', path: '/clients' },
   { name: 'Careers',  path: '/careers' },
   { name: 'Contact',  path: '/contact' },
 ]

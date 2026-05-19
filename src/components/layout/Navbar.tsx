@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronRight } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { name: 'Home',     path: '/' },
   { name: 'Services', path: '/services' },
   { name: 'About',    path: '/about' },
-  { name: 'Projects', path: '/projects' },
+  { name: 'Clients', path: '/clients' },
   { name: 'Careers',  path: '/careers' },
   { name: 'Contact',  path: '/contact' },
 ]
@@ -65,17 +65,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Desktop CTA */}
-          <div className="hidden md:block">
-            <Link
-              to="/contact"
-              className="inline-flex items-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-5 py-2.5 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-200 hover:shadow-lg hover:shadow-dcs-red/40 hover:-translate-y-0.5 animate-pulse-red"
-            >
-              <span>Get a Quote</span>
-              <ChevronRight size={15} />
-            </Link>
-          </div>
-
           {/* Hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -111,12 +100,6 @@ export default function Navbar() {
                   {link.name}
                 </Link>
               ))}
-              <Link
-                to="/contact"
-                className="block text-center mt-3 bg-dcs-red hover:bg-dcs-red-dark px-5 py-3 rounded-xl font-inter font-semibold text-white transition-colors"
-              >
-                Get a Quote
-              </Link>
             </div>
           </motion.div>
         )}

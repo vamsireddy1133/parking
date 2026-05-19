@@ -1,151 +1,207 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, MapPin, Building2, Home, Heart, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown, Building2, Home, Heart, GraduationCap, UtensilsCrossed } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
-type Category = 'All' | 'Commercial' | 'Residential' | 'Healthcare'
+type Category = 'All' | 'Commercial' | 'Residential' | 'Healthcare' | 'Hospitality' | 'Education'
 
-interface Project {
-  title: string
-  location: string
+interface ClientGroup {
+  id: string
+  name: string
   category: Category
-  services: string[]
-  bays: string
-  year: string
-  desc: string
-  accent: string
-  headerBg: string
-  icon: React.ElementType
+  projects: string[]
 }
 
-const projects: Project[] = [
+const clients: ClientGroup[] = [
   {
-    title: 'Salarpuria Satva Knowledge Park',
-    location: 'HITEC City, Hyderabad',
+    id: 'salarpuria',
+    name: 'Salarpuria Satva',
     category: 'Commercial',
-    services: ['Floor Marking', 'Layout Design', 'Sign Boards'],
-    bays: '650',
-    year: '2024',
-    desc: 'Multi-level basement parking with epoxy slot markings, column numbering, retroreflective signage, and traffic flow design for one of Hyderabad\'s premier tech parks.',
-    accent: 'text-blue-300',
-    headerBg: 'from-blue-900/60 to-dcs-navy',
-    icon: Building2,
+    projects: [
+      'Salarpuria Satva Knowledge Park',
+      'Salarpuria Satva Knowledge Capital',
+      'Salarpuria Satva Knowledge City',
+      'Salarpuria Satva Necklace Pride Mall',
+      'Salarpuria Satva Signature Tower',
+      'Salarpuria Satva Magnus',
+    ],
   },
   {
-    title: 'MyHome Bhooja',
-    location: 'Kokapet, Hyderabad',
+    id: 'myhome',
+    name: 'MyHome',
     category: 'Residential',
-    services: ['Floor Marking', 'Layout Design', 'Smart Parking'],
-    bays: '900',
-    year: '2024',
-    desc: 'Premium residential tower with colour-coded zone markings per block, visitor bay management, pillar number system, and smart parking allocation.',
-    accent: 'text-emerald-300',
-    headerBg: 'from-emerald-900/60 to-dcs-navy',
-    icon: Home,
+    projects: [
+      'MyHome Bhooja',
+      'MyHome Twitza',
+      'MyHome Tarkshya',
+      'MyHome Tridasa',
+      'MyHome Skyview',
+      'MyHome Mangala',
+      'MyHome Ankura',
+      'MyHome Raka',
+      'MyHome Nishida',
+    ],
   },
   {
-    title: 'Phoenix Centarus',
-    location: 'Neopolis, Hyderabad',
+    id: 'phoenix',
+    name: 'Phoenix Group',
     category: 'Commercial',
-    services: ['Floor Marking', 'Sign Boards', 'Smart Parking'],
-    bays: '1,200',
-    year: '2023',
-    desc: 'End-to-end parking solution with epoxy markings, LED wayfinding signage, EV charging bay demarcation, and FASTag-integrated billing system.',
-    accent: 'text-blue-300',
-    headerBg: 'from-blue-900/60 to-dcs-navy',
-    icon: Building2,
+    projects: [
+      'Phoenix Centarus',
+      'Phoenix Litho',
+      'Phoenix Aquila',
+      'Phoenix Ivy',
+      'Phoenix H10',
+    ],
   },
   {
-    title: 'Amazon Hyderabad Campus',
-    location: 'Nanakramguda, Hyderabad',
+    id: 'rajapushpa',
+    name: 'Rajapushpa',
+    category: 'Residential',
+    projects: [
+      'Rajapushpa Summit',
+      'Rajapushpa Paradium',
+      'Rajapushpa Provencia',
+    ],
+  },
+  {
+    id: 'smr',
+    name: 'SMR',
+    category: 'Residential',
+    projects: [
+      'SMR Casa Carino Villas',
+      'SMR Iconia',
+    ],
+  },
+  {
+    id: 'aurobindo',
+    name: 'Aurobindo',
+    category: 'Residential',
+    projects: [
+      'Aurobindo Galaxy',
+      'Aurobindo Orbit',
+    ],
+  },
+  {
+    id: 'asbl',
+    name: 'ASBL',
+    category: 'Residential',
+    projects: [
+      'ASBL Lakeside',
+      'ASBL Spire',
+    ],
+  },
+  {
+    id: 'amazon',
+    name: 'Amazon',
     category: 'Commercial',
-    services: ['Floor Marking', 'Layout Design', 'Sign Boards'],
-    bays: '800',
-    year: '2023',
-    desc: 'Corporate campus with precision epoxy markings, statutory safety signage, disabled bay compliance, dedicated two-wheeler zones, and column guard installation.',
-    accent: 'text-blue-300',
-    headerBg: 'from-blue-900/60 to-dcs-navy',
-    icon: Building2,
+    projects: ['Amazon Hyderabad Campus'],
   },
   {
-    title: 'Sindhu Hospitals',
-    location: 'Kukatpally, Hyderabad',
+    id: 'google',
+    name: 'Google',
+    category: 'Commercial',
+    projects: ['Google Hyderabad Office'],
+  },
+  {
+    id: 'raheja',
+    name: 'Raheja Mindspace',
+    category: 'Commercial',
+    projects: ['Raheja Mindspace IT Park'],
+  },
+  {
+    id: 'capitaland',
+    name: 'Capitaland',
+    category: 'Commercial',
+    projects: ['Capitaland'],
+  },
+  {
+    id: 'jpmc',
+    name: 'JPMC',
+    category: 'Commercial',
+    projects: ['JPMC'],
+  },
+  {
+    id: 'pranava',
+    name: 'Pranava Group',
+    category: 'Commercial',
+    projects: ['Pranava Group'],
+  },
+  {
+    id: 'gsquare',
+    name: 'GSquare',
+    category: 'Commercial',
+    projects: ['GSquare'],
+  },
+  {
+    id: 'simplywork',
+    name: 'Simply Work',
+    category: 'Commercial',
+    projects: ['Simply Work'],
+  },
+  {
+    id: 'kurnool',
+    name: 'Kurnool TG Mall',
+    category: 'Commercial',
+    projects: ['Kurnool TG Mall'],
+  },
+  {
+    id: 'sriaditya',
+    name: 'Sri Aditya',
+    category: 'Residential',
+    projects: ['Sri Aditya'],
+  },
+  {
+    id: 'hrmani',
+    name: 'Hrmani',
+    category: 'Residential',
+    projects: ['Hrmani'],
+  },
+  {
+    id: 'sindhu',
+    name: 'Sindhu Hospitals',
     category: 'Healthcare',
-    services: ['Layout Design', 'Sign Boards', 'Smart Parking'],
-    bays: '320',
-    year: '2023',
-    desc: 'Hospital campus parking with dedicated ambulance corridors, priority bays for patients and disabled visitors, visitor time-based billing, and 24/7 occupancy monitoring.',
-    accent: 'text-red-300',
-    headerBg: 'from-red-900/60 to-dcs-navy',
-    icon: Heart,
+    projects: ['Sindhu Hospitals'],
   },
   {
-    title: 'Raheja Mindspace',
-    location: 'HITEC City, Hyderabad',
-    category: 'Commercial',
-    services: ['Floor Marking', 'Layout Design', 'Sign Boards'],
-    bays: '1,100',
-    year: '2023',
-    desc: 'Complete basement and surface parking overhaul for one of Hyderabad\'s largest IT parks, delivering 30% more bay capacity with optimised traffic flow redesign.',
-    accent: 'text-blue-300',
-    headerBg: 'from-blue-900/60 to-dcs-navy',
-    icon: Building2,
+    id: 'jubilee',
+    name: 'Jubilee Hills Club',
+    category: 'Hospitality',
+    projects: ['Jubilee Hills Club'],
   },
   {
-    title: 'ASBL Spire',
-    location: 'Financial District, Hyderabad',
-    category: 'Residential',
-    services: ['Floor Marking', 'Sign Boards'],
-    bays: '450',
-    year: '2022',
-    desc: 'Premium high-rise residential tower with floor-wise colour-coded markings, pillar numbering, visitor management zones, and anti-skid epoxy at pedestrian crossings.',
-    accent: 'text-emerald-300',
-    headerBg: 'from-emerald-900/60 to-dcs-navy',
-    icon: Home,
+    id: 'filmnagar',
+    name: 'Filmnagar Club',
+    category: 'Hospitality',
+    projects: ['Filmnagar Club'],
   },
   {
-    title: 'Aurobindo Galaxy',
-    location: 'Miyapur, Hyderabad',
-    category: 'Residential',
-    services: ['Floor Marking', 'Layout Design', 'Sign Boards'],
-    bays: '560',
-    year: '2022',
-    desc: 'Gated community parking solution with tower-wise colour coding, two-wheeler bay demarcation, visitor stacking lanes, and reflective wayfinding signage throughout.',
-    accent: 'text-emerald-300',
-    headerBg: 'from-emerald-900/60 to-dcs-navy',
-    icon: Home,
-  },
-  {
-    title: 'Rajapushpa Summit',
-    location: 'Kokapet, Hyderabad',
-    category: 'Residential',
-    services: ['Floor Marking', 'Layout Design', 'Smart Parking'],
-    bays: '700',
-    year: '2021',
-    desc: 'Luxury residential complex with ANPR boom barrier at entry/exit, resident digital passes, smart parking integration, and real-time bay occupancy display.',
-    accent: 'text-emerald-300',
-    headerBg: 'from-emerald-900/60 to-dcs-navy',
-    icon: Home,
+    id: 'meru',
+    name: 'Meru International School',
+    category: 'Education',
+    projects: ['Meru International School'],
   },
 ]
 
-const categories: Category[] = ['All', 'Commercial', 'Residential', 'Healthcare']
+const categories: Category[] = ['All', 'Commercial', 'Residential', 'Healthcare', 'Hospitality', 'Education']
 
-const categoryBadge: Record<Category, string> = {
-  All: '',
-  Commercial: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-  Residential: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
-  Healthcare: 'bg-red-500/20 text-red-300 border-red-500/30',
+const categoryStyle: Record<Category, { badge: string; icon: React.ElementType; accent: string; grad: string }> = {
+  All:         { badge: '', icon: Building2, accent: 'text-gray-300', grad: 'from-gray-800/60 to-dcs-navy' },
+  Commercial:  { badge: 'bg-blue-500/15 text-blue-300 border-blue-500/30',    icon: Building2,        accent: 'text-blue-300',   grad: 'from-blue-900/50 to-dcs-navy' },
+  Residential: { badge: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30', icon: Home,        accent: 'text-emerald-300', grad: 'from-emerald-900/50 to-dcs-navy' },
+  Healthcare:  { badge: 'bg-red-500/15 text-red-300 border-red-500/30',       icon: Heart,            accent: 'text-red-300',    grad: 'from-red-900/50 to-dcs-navy' },
+  Hospitality: { badge: 'bg-amber-500/15 text-amber-300 border-amber-500/30', icon: UtensilsCrossed,  accent: 'text-amber-300',  grad: 'from-amber-900/50 to-dcs-navy' },
+  Education:   { badge: 'bg-purple-500/15 text-purple-300 border-purple-500/30', icon: GraduationCap, accent: 'text-purple-300', grad: 'from-purple-900/50 to-dcs-navy' },
 }
 
 export default function Projects() {
   const [active, setActive] = useState<Category>('All')
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
-  const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
+  const [expanded, setExpanded] = useState<string | null>(null)
 
-  const toggleExpand = (i: number) =>
-    setExpandedIndex((prev) => (prev === i ? null : i))
+  const filtered = active === 'All' ? clients : clients.filter((c) => c.category === active)
+
+  const toggle = (id: string) => setExpanded((prev) => (prev === id ? null : id))
 
   return (
     <div className="bg-dcs-navy-dark">
@@ -161,7 +217,7 @@ export default function Projects() {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center bg-white/5 border border-white/15 text-gray-400 text-xs font-inter font-semibold px-4 py-1.5 rounded-full mb-6 uppercase tracking-wider"
           >
-            Our Portfolio
+            Our Clients
           </motion.span>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -169,7 +225,7 @@ export default function Projects() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-outfit font-black text-5xl sm:text-6xl text-white leading-tight mb-6"
           >
-            1,000+ Projects.<br />
+            500+ Clients.<br />
             <span className="text-dcs-red">One Standard.</span>
           </motion.h1>
           <motion.p
@@ -178,7 +234,7 @@ export default function Projects() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-inter text-gray-400 text-lg leading-relaxed"
           >
-            A selection of completed projects across commercial, residential, and healthcare sectors in Hyderabad.
+            Every brand below trusted us with their parking infrastructure. Click any card to see the projects we delivered for them.
           </motion.p>
         </div>
       </section>
@@ -190,7 +246,7 @@ export default function Projects() {
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActive(cat)}
+                onClick={() => { setActive(cat); setExpanded(null) }}
                 className={`px-5 py-2 rounded-full font-inter font-medium text-sm transition-all duration-200 border ${
                   active === cat
                     ? 'bg-dcs-red border-dcs-red text-white shadow-lg shadow-dcs-red/30'
@@ -204,7 +260,7 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* ── Project Grid ── */}
+      {/* ── Client Cards ── */}
       <section className="px-4 sm:px-6 lg:px-8 pb-24">
         <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
@@ -213,173 +269,91 @@ export default function Projects() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
             >
-              {/* ── Mobile: accordion list ── */}
-              <div className="md:hidden space-y-3">
-                {filtered.map((p, i) => {
-                  const isOpen = expandedIndex === i
-                  return (
-                    <motion.div
-                      key={p.title}
-                      initial={{ opacity: 0, y: 16 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3, delay: i * 0.04 }}
-                      className="rounded-2xl overflow-hidden border border-white/8 bg-dcs-navy-light"
-                    >
-                      {/* Compact row — always visible */}
-                      <button
-                        onClick={() => toggleExpand(i)}
-                        className="w-full flex items-center justify-between px-4 py-4 text-left"
-                      >
-                        <div className="flex items-center space-x-3 min-w-0">
-                          <div className={`w-9 h-9 rounded-xl bg-gradient-to-br ${p.headerBg} border border-white/10 flex items-center justify-center shrink-0`}>
-                            <p.icon size={16} className={p.accent} />
-                          </div>
-                          <div className="min-w-0">
-                            <p className="font-outfit font-bold text-white text-sm leading-tight truncate">{p.title}</p>
-                            <div className="flex items-center space-x-1 mt-0.5">
-                              <MapPin size={10} className="text-gray-500 shrink-0" />
-                              <span className="text-gray-500 font-inter text-xs truncate">{p.location}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flex items-center space-x-2 shrink-0 ml-2">
-                          <span className={`text-xs font-inter font-semibold px-2 py-0.5 rounded-full border hidden sm:inline ${categoryBadge[p.category]}`}>
-                            {p.category}
-                          </span>
-                          <ChevronDown
-                            size={18}
-                            className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-                          />
-                        </div>
-                      </button>
+              {filtered.map((client, i) => {
+                const style = categoryStyle[client.category]
+                const Icon = style.icon
+                const isOpen = expanded === client.id
 
-                      {/* Expanded details */}
-                      <AnimatePresence initial={false}>
-                        {isOpen && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: 'easeInOut' }}
-                            className="overflow-hidden"
-                          >
-                            <div className={`bg-gradient-to-br ${p.headerBg} px-4 py-4 relative`}>
-                              <div className="absolute inset-0 grid-bg opacity-20" />
-                              <div className="relative flex items-center justify-between">
-                                <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border ${categoryBadge[p.category]}`}>
-                                  {p.category}
-                                </span>
-                                <div className="text-right">
-                                  <span className={`font-outfit font-black text-2xl ${p.accent}`}>{p.bays}</span>
-                                  <span className="text-gray-400 font-inter text-xs ml-1">bays · {p.year}</span>
-                                </div>
-                              </div>
-                            </div>
-                            <div className="px-4 py-4 border-t border-white/5">
-                              <p className="text-gray-400 font-inter text-sm leading-relaxed mb-3">{p.desc}</p>
-                              <div className="flex flex-wrap gap-1.5">
-                                {p.services.map((svc) => (
-                                  <span key={svc} className="text-xs font-inter text-gray-400 bg-white/5 border border-white/8 px-2.5 py-1 rounded-full">
-                                    {svc}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
-                  )
-                })}
-              </div>
-
-              {/* ── Desktop: grid cards ── */}
-              <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filtered.map((p, i) => (
+                return (
                   <motion.div
-                    key={p.title}
-                    initial={{ opacity: 0, y: 24 }}
+                    key={client.id}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: i * 0.06 }}
-                    className="rounded-2xl overflow-hidden border border-white/8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 group glow-hover"
+                    transition={{ duration: 0.35, delay: i * 0.04 }}
+                    className={`rounded-2xl overflow-hidden border transition-all duration-300 cursor-pointer ${
+                      isOpen
+                        ? 'border-dcs-red/50 shadow-lg shadow-dcs-red/10'
+                        : 'border-white/8 hover:border-white/20'
+                    } bg-dcs-navy-light`}
+                    onClick={() => toggle(client.id)}
                   >
-                    <div className={`bg-gradient-to-br ${p.headerBg} p-6 relative overflow-hidden`}>
-                      <div className="absolute inset-0 grid-bg opacity-30" />
-                      <div className="relative flex items-start justify-between">
-                        <div className="w-12 h-12 rounded-xl bg-white/8 border border-white/15 flex items-center justify-center">
-                          <p.icon size={22} className={p.accent} />
+                    {/* Card header */}
+                    <div className={`bg-gradient-to-br ${style.grad} p-5`}>
+                      <div className="flex items-center justify-between">
+                        <div className={`w-10 h-10 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center`}>
+                          <Icon size={18} className={style.accent} />
                         </div>
-                        <div className="text-right">
-                          <p className={`font-outfit font-black text-3xl ${p.accent}`}>{p.bays}</p>
-                          <p className="text-gray-400 font-inter text-xs uppercase tracking-wider">Bays</p>
-                        </div>
+                        <ChevronDown
+                          size={18}
+                          className={`text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                        />
                       </div>
-                      <div className="relative mt-5 flex items-center justify-between">
-                        <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border ${categoryBadge[p.category]}`}>
-                          {p.category}
-                        </span>
-                        <span className="text-gray-500 font-inter text-xs">{p.year}</span>
-                      </div>
-                    </div>
-                    <div className="bg-dcs-navy-light p-6">
-                      <h3 className="font-outfit font-bold text-lg text-white leading-tight mb-1">{p.title}</h3>
-                      <div className="flex items-center space-x-1 mb-3">
-                        <MapPin size={12} className="text-gray-500" />
-                        <span className="text-gray-500 font-inter text-xs">{p.location}</span>
-                      </div>
-                      <p className="text-gray-400 font-inter text-sm leading-relaxed mb-4">{p.desc}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {p.services.map((svc) => (
-                          <span key={svc} className="text-xs font-inter text-gray-400 bg-white/5 border border-white/8 px-2.5 py-1 rounded-full">
-                            {svc}
+                      <div className="mt-4">
+                        <h3 className="font-outfit font-bold text-lg text-white leading-tight">{client.name}</h3>
+                        <div className="flex items-center justify-between mt-2">
+                          <span className={`text-xs font-inter font-semibold px-2.5 py-1 rounded-full border ${style.badge}`}>
+                            {client.category}
                           </span>
-                        ))}
+                          <span className="text-gray-500 font-inter text-xs">
+                            {client.projects.length} {client.projects.length === 1 ? 'project' : 'projects'}
+                          </span>
+                        </div>
                       </div>
                     </div>
+
+                    {/* Expanded project list */}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: 'easeInOut' }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-5 py-4 border-t border-white/8">
+                            <p className="text-gray-500 font-inter text-xs uppercase tracking-wider mb-3">Projects</p>
+                            <ul className="space-y-2">
+                              {client.projects.map((proj) => (
+                                <li key={proj} className="flex items-start space-x-2.5">
+                                  <div className="w-1.5 h-1.5 rounded-full bg-dcs-red mt-1.5 shrink-0" />
+                                  <span className="text-gray-300 font-inter text-sm leading-snug">{proj}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </motion.div>
-                ))}
-              </div>
+                )
+              })}
             </motion.div>
           </AnimatePresence>
         </div>
       </section>
 
-      {/* ── Clientele Banner ── */}
-      <section className="bg-dcs-navy border-y border-white/5 py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <SectionHeader
-            badge="Our Clientele"
-            title="Trusted by Leading Names"
-            subtitle="From tech parks and residential towers to hospitals and corporate campuses — our clients include some of the most recognised names in Hyderabad."
-          />
-          <div className="mt-10 flex flex-wrap justify-center gap-3">
-            {[
-              'Salarpuria Satva','MyHome Group','Phoenix Group','Amazon','Google',
-              'Raheja Mindspace','ASBL','Aurobindo','Rajapushpa','Sindhu Hospitals',
-              'Pranava Group','Capitaland','Jubilee Hills Club','JPMC','Gsquare',
-              'SMR Group','Simply Work','Kurnool TG Mall','Sri Aditya','Filmnagar Club',
-            ].map((client) => (
-              <span
-                key={client}
-                className="bg-white/5 border border-white/10 text-gray-300 font-inter text-sm px-4 py-2 rounded-full hover:border-dcs-red/40 hover:text-white transition-all duration-200"
-              >
-                {client}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── Stats Banner ── */}
-      <section className="bg-dcs-navy-dark py-16 px-4 sm:px-6 lg:px-8">
+      <section className="bg-dcs-navy border-y border-white/5 py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { val: '1,000+', label: 'Projects Delivered' },
               { val: '500+',   label: 'Clients Served' },
-              { val: '7+',     label: 'Service Categories' },
+              { val: '10+',    label: 'Years Experience' },
               { val: '100%',   label: 'On-Time Delivery' },
             ].map((stat) => (
               <div key={stat.label}>
