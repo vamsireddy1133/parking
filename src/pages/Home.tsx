@@ -159,8 +159,8 @@ export default function Home() {
             transition={{ duration: 0.65, delay: 0.1 }}
             className="font-outfit font-black text-5xl sm:text-6xl md:text-7xl text-white leading-[1.08] mb-6"
           >
-            One-Point Solutions<br />
-            <span className="text-dcs-red">For All Parking</span> Needs
+            Expert<br />
+            <span className="text-dcs-red">Parking</span> Solutions
           </motion.h1>
 
           <motion.p

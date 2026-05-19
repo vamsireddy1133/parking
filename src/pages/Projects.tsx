@@ -82,7 +82,7 @@ export default function Projects() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+              className="flex flex-col gap-3"
             >
               {filtered.map((client, i) => {
                 const style = categoryStyle[client.category]
@@ -91,31 +91,25 @@ export default function Projects() {
                 return (
                   <motion.div
                     key={client.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.35, delay: i * 0.04 }}
                   >
                     <Link
                       to={`/clients/${client.id}`}
-                      className="block rounded-2xl overflow-hidden border border-white/8 hover:border-dcs-red/50 hover:shadow-lg hover:shadow-dcs-red/10 transition-all duration-300 hover:-translate-y-1 group"
+                      className={`flex items-center justify-between bg-gradient-to-r ${style.grad} border border-white/8 hover:border-dcs-red/50 hover:shadow-lg hover:shadow-dcs-red/10 rounded-2xl px-6 py-5 transition-all duration-300 group`}
                     >
-                      {/* Gradient header */}
-                      <div className={`bg-gradient-to-br ${style.grad} p-5`}>
-                        <div className="flex items-center justify-between">
-                          <div className="w-10 h-10 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center">
-                            <Icon size={18} className={style.accent} />
-                          </div>
-                          <ArrowUpRight
-                            size={18}
-                            className="text-gray-500 group-hover:text-white transition-colors duration-200"
-                          />
+                      {/* Left: icon + name + badge */}
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center shrink-0">
+                          <Icon size={20} className={style.accent} />
                         </div>
-                        <div className="mt-4">
-                          <h3 className="font-outfit font-bold text-lg text-white leading-tight group-hover:text-white">
+                        <div>
+                          <h3 className="font-outfit font-bold text-lg text-white leading-tight">
                             {client.name}
                           </h3>
-                          <div className="flex items-center justify-between mt-2">
-                            <span className={`text-xs font-inter font-semibold px-2.5 py-1 rounded-full border ${style.badge}`}>
+                          <div className="flex items-center space-x-3 mt-1">
+                            <span className={`text-xs font-inter font-semibold px-2.5 py-0.5 rounded-full border ${style.badge}`}>
                               {client.category}
                             </span>
                             <span className="text-gray-500 font-inter text-xs">
@@ -124,6 +118,12 @@ export default function Projects() {
                           </div>
                         </div>
                       </div>
+
+                      {/* Right: arrow */}
+                      <ArrowUpRight
+                        size={20}
+                        className="text-gray-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0"
+                      />
                     </Link>
                   </motion.div>
                 )
