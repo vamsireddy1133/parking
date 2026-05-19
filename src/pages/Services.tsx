@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
   Car, PenTool, Building2, Monitor,
-  CheckCircle, ArrowRight, Layers, Zap, Shield, BarChart3,
+  CheckCircle, ArrowRight, Layers, Zap, Shield, BarChart3, ChevronDown,
 } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
@@ -93,6 +94,9 @@ const process = [
 ]
 
 export default function Services() {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  const toggle = (i: number) => setExpandedIndex((prev) => (prev === i ? null : i))
+
   return (
     <div className="bg-dcs-navy-dark">
 
@@ -132,54 +136,128 @@ export default function Services() {
 
       {/* ── Service Sections ── */}
       <section className="px-4 sm:px-6 lg:px-8 pb-8">
-        <div className="max-w-7xl mx-auto space-y-8">
-          {services.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className={`grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden border border-white/8 ${i % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''}`}
-            >
-              {/* Text side */}
-              <div className="bg-dcs-navy-light p-10 lg:p-14 flex flex-col justify-center">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} border border-white/10 flex items-center justify-center mb-6`}>
-                  <s.icon size={26} className={s.iconColor} />
-                </div>
-                <p className="text-dcs-red font-inter text-xs font-semibold uppercase tracking-widest mb-2">{s.tagline}</p>
-                <h2 className="font-outfit font-black text-3xl text-white mb-4">{s.title}</h2>
-                <p className="text-gray-400 font-inter text-sm leading-relaxed mb-8">{s.description}</p>
-                <ul className="space-y-3">
-                  {s.benefits.map((b) => (
-                    <li key={b} className="flex items-start space-x-3">
-                      <CheckCircle size={16} className="text-dcs-red mt-0.5 shrink-0" />
-                      <span className="text-gray-300 font-inter text-sm leading-relaxed">{b}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center space-x-2 mt-8 bg-dcs-red hover:bg-dcs-red-dark px-6 py-3 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-dcs-red/30 self-start"
-                >
-                  <span>Get a Quote</span>
-                  <ArrowRight size={15} />
-                </Link>
-              </div>
+        <div className="max-w-7xl mx-auto">
 
-              {/* Visual side */}
-              <div className={`relative min-h-[320px] bg-gradient-to-br ${s.color} bg-dcs-navy flex items-center justify-center p-10`}>
-                <div className="absolute inset-0 grid-bg opacity-40" />
-                <div className="relative text-center">
-                  <div className={`w-24 h-24 rounded-3xl bg-gradient-to-br ${s.color} border border-white/15 flex items-center justify-center mx-auto mb-6 animate-float`}>
-                    <s.icon size={44} className={s.iconColor} />
+          {/* ── Mobile: accordion ── */}
+          <div className="lg:hidden space-y-3">
+            {services.map((s, i) => {
+              const isOpen = expandedIndex === i
+              return (
+                <motion.div
+                  key={s.title}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  viewport={{ once: true }}
+                  className="rounded-2xl overflow-hidden border border-white/8 bg-dcs-navy-light"
+                >
+                  {/* Compact row */}
+                  <button
+                    onClick={() => toggle(i)}
+                    className="w-full flex items-center justify-between px-4 py-4 text-left"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${s.color} border border-white/10 flex items-center justify-center shrink-0`}>
+                        <s.icon size={18} className={s.iconColor} />
+                      </div>
+                      <div>
+                        <p className="font-outfit font-bold text-white text-sm">{s.title}</p>
+                        <p className="text-dcs-red font-inter text-xs">{s.tagline}</p>
+                      </div>
+                    </div>
+                    <ChevronDown
+                      size={18}
+                      className={`text-gray-400 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+
+                  {/* Expanded content */}
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-4 pb-5 border-t border-white/5 pt-4 space-y-4">
+                          <p className="text-gray-400 font-inter text-sm leading-relaxed">{s.description}</p>
+                          <ul className="space-y-2.5">
+                            {s.benefits.map((b) => (
+                              <li key={b} className="flex items-start space-x-2.5">
+                                <CheckCircle size={14} className="text-dcs-red mt-0.5 shrink-0" />
+                                <span className="text-gray-300 font-inter text-sm leading-relaxed">{b}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          <Link
+                            to="/contact"
+                            className="inline-flex items-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-5 py-2.5 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-300"
+                          >
+                            <span>Get a Quote</span>
+                            <ArrowRight size={14} />
+                          </Link>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {/* ── Desktop: full alternating layout ── */}
+          <div className="hidden lg:block space-y-8">
+            {services.map((s, i) => (
+              <motion.div
+                key={s.title}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className={`grid grid-cols-2 gap-0 rounded-3xl overflow-hidden border border-white/8 ${i % 2 === 1 ? '[&>*:first-child]:order-2' : ''}`}
+              >
+                {/* Text side */}
+                <div className="bg-dcs-navy-light p-14 flex flex-col justify-center">
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${s.color} border border-white/10 flex items-center justify-center mb-6`}>
+                    <s.icon size={26} className={s.iconColor} />
                   </div>
-                  <p className={`font-outfit font-black text-2xl ${s.iconColor} mb-1`}>{s.title}</p>
-                  <p className="text-gray-400 font-inter text-sm">{s.tagline}</p>
+                  <p className="text-dcs-red font-inter text-xs font-semibold uppercase tracking-widest mb-2">{s.tagline}</p>
+                  <h2 className="font-outfit font-black text-3xl text-white mb-4">{s.title}</h2>
+                  <p className="text-gray-400 font-inter text-sm leading-relaxed mb-8">{s.description}</p>
+                  <ul className="space-y-3">
+                    {s.benefits.map((b) => (
+                      <li key={b} className="flex items-start space-x-3">
+                        <CheckCircle size={16} className="text-dcs-red mt-0.5 shrink-0" />
+                        <span className="text-gray-300 font-inter text-sm leading-relaxed">{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center space-x-2 mt-8 bg-dcs-red hover:bg-dcs-red-dark px-6 py-3 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-dcs-red/30 self-start"
+                  >
+                    <span>Get a Quote</span>
+                    <ArrowRight size={15} />
+                  </Link>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+
+                {/* Visual side */}
+                <div className={`relative bg-gradient-to-br ${s.color} bg-dcs-navy flex items-center justify-center p-10`}>
+                  <div className="absolute inset-0 grid-bg opacity-40" />
+                  <div className="relative text-center">
+                    <div className={`w-24 h-24 rounded-3xl bg-gradient-to-br ${s.color} border border-white/15 flex items-center justify-center mx-auto mb-6 animate-float`}>
+                      <s.icon size={44} className={s.iconColor} />
+                    </div>
+                    <p className={`font-outfit font-black text-2xl ${s.iconColor} mb-1`}>{s.title}</p>
+                    <p className="text-gray-400 font-inter text-sm">{s.tagline}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
         </div>
       </section>
 
