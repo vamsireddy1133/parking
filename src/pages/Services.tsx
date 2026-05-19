@@ -1,9 +1,8 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import {
   Car, PenTool, Building2, Monitor,
-  CheckCircle, ArrowRight, Layers, Zap, Shield, BarChart3, ChevronDown,
+  CheckCircle, Layers, Zap, Shield, BarChart3, ChevronDown,
 } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
@@ -182,7 +181,6 @@ export default function Services() {
                         className="overflow-hidden"
                       >
                         <div className="px-4 pb-5 border-t border-white/5 pt-4 space-y-4">
-                          <p className="text-gray-400 font-inter text-sm leading-relaxed">{s.description}</p>
                           <ul className="space-y-2.5">
                             {s.benefits.map((b) => (
                               <li key={b} className="flex items-start space-x-2.5">
@@ -191,13 +189,6 @@ export default function Services() {
                               </li>
                             ))}
                           </ul>
-                          <Link
-                            to="/contact"
-                            className="inline-flex items-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-5 py-2.5 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-300"
-                          >
-                            <span>Get a Quote</span>
-                            <ArrowRight size={14} />
-                          </Link>
                         </div>
                       </motion.div>
                     )}
@@ -227,15 +218,7 @@ export default function Services() {
                     </div>
                     <div>
                       <p className="text-gray-400 font-inter text-xs font-semibold uppercase tracking-widest mb-1">{s.tagline}</p>
-                      <h2 className="font-outfit font-black text-2xl text-white leading-tight mb-3">{s.title}</h2>
-                      <p className="text-gray-400 font-inter text-sm leading-relaxed">{s.description}</p>
-                      <Link
-                        to="/contact"
-                        className="inline-flex items-center space-x-2 mt-6 bg-dcs-red hover:bg-dcs-red-dark px-5 py-2.5 rounded-xl font-inter font-semibold text-sm text-white transition-all duration-300 hover:shadow-lg hover:shadow-dcs-red/30"
-                      >
-                        <span>Enquire Now</span>
-                        <ArrowRight size={14} />
-                      </Link>
+                      <h2 className={`font-outfit font-black text-2xl leading-tight ${s.iconColor}`}>{s.title}</h2>
                     </div>
                   </div>
                   {/* Right: benefits */}
@@ -325,30 +308,6 @@ export default function Services() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <section className="pb-24 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-br from-dcs-navy-light to-dcs-navy rounded-3xl p-12 border border-white/10"
-          >
-            <h2 className="font-outfit font-black text-4xl text-white mb-4">Ready to Get Started?</h2>
-            <p className="text-gray-400 font-inter text-lg mb-8">
-              Tell us about your project and we'll have a proposal on your desk within 24 hours.
-            </p>
-            <Link
-              to="/contact"
-              className="inline-flex items-center space-x-2 bg-dcs-red hover:bg-dcs-red-dark px-10 py-4 rounded-xl font-inter font-semibold text-white transition-all duration-300 hover:shadow-2xl hover:shadow-dcs-red/30"
-            >
-              <span>Request a Free Quote</span>
-              <ArrowRight size={18} />
-            </Link>
-          </motion.div>
-        </div>
-      </section>
     </div>
   )
 }
