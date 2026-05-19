@@ -181,6 +181,7 @@ export default function Services() {
                         className="overflow-hidden"
                       >
                         <div className="px-4 pb-5 border-t border-white/5 pt-4 space-y-4">
+                          <p className="text-gray-400 font-inter text-sm leading-relaxed">{s.description}</p>
                           <ul className="space-y-2.5">
                             {s.benefits.map((b) => (
                               <li key={b} className="flex items-start space-x-2.5">
@@ -218,7 +219,8 @@ export default function Services() {
                     </div>
                     <div>
                       <p className="text-gray-400 font-inter text-xs font-semibold uppercase tracking-widest mb-1">{s.tagline}</p>
-                      <h2 className={`font-outfit font-black text-2xl leading-tight ${s.iconColor}`}>{s.title}</h2>
+                      <h2 className={`font-outfit font-black text-2xl leading-tight mb-3 ${s.iconColor}`}>{s.title}</h2>
+                      <p className="text-gray-400 font-inter text-sm leading-relaxed">{s.description}</p>
                     </div>
                   </div>
                   {/* Right: benefits */}
