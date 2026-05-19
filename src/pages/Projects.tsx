@@ -74,7 +74,7 @@ export default function Projects() {
 
       {/* ── Client Cards ── */}
       <section className="px-4 sm:px-6 lg:px-8 pb-24">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -82,7 +82,7 @@ export default function Projects() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="flex flex-col gap-3"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
             >
               {filtered.map((client, i) => {
                 const style = categoryStyle[client.category]
@@ -100,15 +100,15 @@ export default function Projects() {
                       className={`flex items-center justify-between bg-gradient-to-r ${style.grad} border border-white/8 hover:border-dcs-red/50 hover:shadow-lg hover:shadow-dcs-red/10 rounded-2xl px-6 py-5 transition-all duration-300 group`}
                     >
                       {/* Left: icon + name + badge */}
-                      <div className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-4 flex-1 justify-center">
                         <div className="w-12 h-12 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center shrink-0">
                           <Icon size={20} className={style.accent} />
                         </div>
-                        <div>
+                        <div className="text-center">
                           <h3 className="font-outfit font-bold text-lg text-white leading-tight">
                             {client.name}
                           </h3>
-                          <div className="flex items-center space-x-3 mt-1">
+                          <div className="flex items-center justify-center space-x-3 mt-1">
                             <span className={`text-xs font-inter font-semibold px-2.5 py-0.5 rounded-full border ${style.badge}`}>
                               {client.category}
                             </span>
