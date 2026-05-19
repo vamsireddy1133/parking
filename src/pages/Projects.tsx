@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, MapPin } from 'lucide-react'
+import { ArrowRight, MapPin, Building2, Home, Heart, Car, PenTool, Monitor, Shield } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
 type Category = 'All' | 'Commercial' | 'Residential' | 'Healthcare'
@@ -14,9 +14,9 @@ interface Project {
   bays: string
   year: string
   desc: string
-  badge: string
-  image: string
-  imageAlt: string
+  accent: string
+  headerBg: string
+  icon: React.ElementType
 }
 
 const projects: Project[] = [
@@ -24,117 +24,123 @@ const projects: Project[] = [
     title: 'Salarpuria Satva Knowledge Park',
     location: 'HITEC City, Hyderabad',
     category: 'Commercial',
-    services: ['Parking Markings', 'Layout Design', 'Signage Boards'],
+    services: ['Floor Marking', 'Layout Design', 'Sign Boards'],
     bays: '650',
     year: '2024',
     desc: 'Multi-level basement parking with epoxy slot markings, column numbering, retroreflective signage, and traffic flow design for one of Hyderabad\'s premier tech parks.',
-    badge: 'bg-blue-500/20 text-blue-300 border-blue-500/20',
-    image: '/p1.png',
-    imageAlt: 'Salarpuria Satva Knowledge Park parking facility',
+    accent: 'text-blue-300',
+    headerBg: 'from-blue-900/60 to-dcs-navy',
+    icon: Building2,
   },
   {
     title: 'MyHome Bhooja',
     location: 'Kokapet, Hyderabad',
     category: 'Residential',
-    services: ['Parking Markings', 'Layout Design', 'BMS Software'],
+    services: ['Floor Marking', 'Layout Design', 'Smart Parking'],
     bays: '900',
     year: '2024',
     desc: 'Premium residential tower with colour-coded zone markings per block, visitor bay management, pillar number system, and smart parking allocation.',
-    badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/20',
-    image: '/p2.png',
-    imageAlt: 'MyHome Bhooja parking',
+    accent: 'text-emerald-300',
+    headerBg: 'from-emerald-900/60 to-dcs-navy',
+    icon: Home,
   },
   {
     title: 'Phoenix Centarus',
     location: 'Neopolis, Hyderabad',
     category: 'Commercial',
-    services: ['Parking Markings', 'Signage Boards', 'BMS Software'],
-    bays: '1200',
+    services: ['Floor Marking', 'Sign Boards', 'Smart Parking'],
+    bays: '1,200',
     year: '2023',
     desc: 'End-to-end parking solution with epoxy markings, LED wayfinding signage, EV charging bay demarcation, and FASTag-integrated billing system.',
-    badge: 'bg-blue-500/20 text-blue-300 border-blue-500/20',
-    image: '/p3.png',
-    imageAlt: 'Phoenix Centarus parking',
+    accent: 'text-blue-300',
+    headerBg: 'from-blue-900/60 to-dcs-navy',
+    icon: Building2,
   },
   {
     title: 'Amazon Hyderabad Campus',
     location: 'Nanakramguda, Hyderabad',
     category: 'Commercial',
-    services: ['Parking Markings', 'Layout Design', 'Signage Boards'],
+    services: ['Floor Marking', 'Layout Design', 'Sign Boards'],
     bays: '800',
     year: '2023',
     desc: 'Corporate campus with precision epoxy markings, statutory safety signage, disabled bay compliance, dedicated two-wheeler zones, and column guard installation.',
-    badge: 'bg-blue-500/20 text-blue-300 border-blue-500/20',
-    image: '/p4.png',
-    imageAlt: 'Amazon Hyderabad Campus parking',
+    accent: 'text-blue-300',
+    headerBg: 'from-blue-900/60 to-dcs-navy',
+    icon: Building2,
   },
   {
     title: 'Sindhu Hospitals',
     location: 'Kukatpally, Hyderabad',
     category: 'Healthcare',
-    services: ['Layout Design', 'Signage Boards', 'BMS Software'],
+    services: ['Layout Design', 'Sign Boards', 'Smart Parking'],
     bays: '320',
     year: '2023',
     desc: 'Hospital campus parking with dedicated ambulance corridors, priority bays for patients and disabled visitors, visitor time-based billing, and 24/7 occupancy monitoring.',
-    badge: 'bg-red-500/20 text-red-300 border-red-500/20',
-    image: '/p5.png',
-    imageAlt: 'Sindhu Hospitals parking',
+    accent: 'text-red-300',
+    headerBg: 'from-red-900/60 to-dcs-navy',
+    icon: Heart,
   },
   {
     title: 'Raheja Mindspace',
     location: 'HITEC City, Hyderabad',
     category: 'Commercial',
-    services: ['Parking Markings', 'Layout Design', 'Signage Boards'],
-    bays: '1100',
+    services: ['Floor Marking', 'Layout Design', 'Sign Boards'],
+    bays: '1,100',
     year: '2023',
     desc: 'Complete basement and surface parking overhaul for one of Hyderabad\'s largest IT parks, delivering 30% more bay capacity with optimised traffic flow redesign.',
-    badge: 'bg-blue-500/20 text-blue-300 border-blue-500/20',
-    image: '/p6.png',
-    imageAlt: 'Raheja Mindspace parking',
+    accent: 'text-blue-300',
+    headerBg: 'from-blue-900/60 to-dcs-navy',
+    icon: Building2,
   },
   {
     title: 'ASBL Spire',
     location: 'Financial District, Hyderabad',
     category: 'Residential',
-    services: ['Parking Markings', 'Signage Boards'],
+    services: ['Floor Marking', 'Sign Boards'],
     bays: '450',
     year: '2022',
     desc: 'Premium high-rise residential tower with floor-wise colour-coded markings, pillar numbering, visitor management zones, and anti-skid epoxy at pedestrian crossings.',
-    badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/20',
-    image: '/p7.png',
-    imageAlt: 'ASBL Spire parking',
+    accent: 'text-emerald-300',
+    headerBg: 'from-emerald-900/60 to-dcs-navy',
+    icon: Home,
   },
   {
     title: 'Aurobindo Galaxy',
     location: 'Miyapur, Hyderabad',
     category: 'Residential',
-    services: ['Parking Markings', 'Layout Design', 'Signage Boards'],
+    services: ['Floor Marking', 'Layout Design', 'Sign Boards'],
     bays: '560',
     year: '2022',
     desc: 'Gated community parking solution with tower-wise colour coding, two-wheeler bay demarcation, visitor stacking lanes, and reflective wayfinding signage throughout.',
-    badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/20',
-    image: '/p8.png',
-    imageAlt: 'Aurobindo Galaxy parking',
+    accent: 'text-emerald-300',
+    headerBg: 'from-emerald-900/60 to-dcs-navy',
+    icon: Home,
   },
   {
     title: 'Rajapushpa Summit',
     location: 'Kokapet, Hyderabad',
     category: 'Residential',
-    services: ['Parking Markings', 'Layout Design', 'BMS Software'],
+    services: ['Floor Marking', 'Layout Design', 'Smart Parking'],
     bays: '700',
     year: '2021',
     desc: 'Luxury residential complex with ANPR boom barrier at entry/exit, resident digital passes, smart parking integration, and real-time bay occupancy display.',
-    badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/20',
-    image: '/p9.png',
-    imageAlt: 'Rajapushpa Summit parking',
+    accent: 'text-emerald-300',
+    headerBg: 'from-emerald-900/60 to-dcs-navy',
+    icon: Home,
   },
 ]
 
 const categories: Category[] = ['All', 'Commercial', 'Residential', 'Healthcare']
 
+const categoryBadge: Record<Category, string> = {
+  All: '',
+  Commercial: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+  Residential: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+  Healthcare: 'bg-red-500/20 text-red-300 border-red-500/30',
+}
+
 export default function Projects() {
   const [active, setActive] = useState<Category>('All')
-
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
 
   return (
@@ -168,8 +174,7 @@ export default function Projects() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="font-inter text-gray-400 text-lg leading-relaxed"
           >
-            Explore a selection of our completed projects across commercial, industrial, residential,
-            healthcare, and government sectors.
+            A selection of completed projects across commercial, residential, and healthcare sectors in Hyderabad.
           </motion.p>
         </div>
       </section>
@@ -213,31 +218,31 @@ export default function Projects() {
                   initial={{ opacity: 0, y: 24 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: i * 0.06 }}
-                  className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group glow-hover"
+                  className="rounded-2xl overflow-hidden border border-white/8 hover:border-white/20 transition-all duration-300 hover:-translate-y-1 group glow-hover"
                 >
-                  {/* Project Image */}
-                  <div className="h-52 relative overflow-hidden bg-dcs-navy">
-                    <img
-                      src={p.image}
-                      alt={p.imageAlt}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                    />
-                    {/* Dark overlay for badge readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between">
-                      <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border backdrop-blur-sm ${p.badge}`}>
+                  {/* Card Header — gradient + icon + bays */}
+                  <div className={`bg-gradient-to-br ${p.headerBg} p-6 relative overflow-hidden`}>
+                    <div className="absolute inset-0 grid-bg opacity-30" />
+                    <div className="relative flex items-start justify-between">
+                      <div className="w-12 h-12 rounded-xl bg-white/8 border border-white/15 flex items-center justify-center">
+                        <p.icon size={22} className={p.accent} />
+                      </div>
+                      <div className="text-right">
+                        <p className={`font-outfit font-black text-3xl ${p.accent}`}>{p.bays}</p>
+                        <p className="text-gray-400 font-inter text-xs uppercase tracking-wider">Bays</p>
+                      </div>
+                    </div>
+                    <div className="relative mt-5 flex items-center justify-between">
+                      <span className={`text-xs font-inter font-semibold px-3 py-1 rounded-full border ${categoryBadge[p.category]}`}>
                         {p.category}
                       </span>
-                      <span className="text-white/70 font-inter text-xs bg-black/30 backdrop-blur-sm px-2 py-0.5 rounded-full">{p.year}</span>
+                      <span className="text-gray-500 font-inter text-xs">{p.year}</span>
                     </div>
                   </div>
 
                   {/* Content */}
                   <div className="bg-dcs-navy-light p-6">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <h3 className="font-outfit font-bold text-lg text-white leading-tight">{p.title}</h3>
-                      <span className="text-dcs-red font-outfit font-black text-sm whitespace-nowrap">{p.bays} bays</span>
-                    </div>
+                    <h3 className="font-outfit font-bold text-lg text-white leading-tight mb-1">{p.title}</h3>
                     <div className="flex items-center space-x-1 mb-3">
                       <MapPin size={12} className="text-gray-500" />
                       <span className="text-gray-500 font-inter text-xs">{p.location}</span>
@@ -258,15 +263,41 @@ export default function Projects() {
         </div>
       </section>
 
-      {/* ── Stats Banner ── */}
+      {/* ── Clientele Banner ── */}
       <section className="bg-dcs-navy border-y border-white/5 py-16 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <SectionHeader
+            badge="Our Clientele"
+            title="Trusted by Leading Names"
+            subtitle="From tech parks and residential towers to hospitals and corporate campuses — our clients include some of the most recognised names in Hyderabad."
+          />
+          <div className="mt-10 flex flex-wrap justify-center gap-3">
+            {[
+              'Salarpuria Satva','MyHome Group','Phoenix Group','Amazon','Google',
+              'Raheja Mindspace','ASBL','Aurobindo','Rajapushpa','Sindhu Hospitals',
+              'Pranava Group','Capitaland','Jubilee Hills Club','JPMC','Gsquare',
+              'SMR Group','Simply Work','Kurnool TG Mall','Sri Aditya','Filmnagar Club',
+            ].map((client) => (
+              <span
+                key={client}
+                className="bg-white/5 border border-white/10 text-gray-300 font-inter text-sm px-4 py-2 rounded-full hover:border-dcs-red/40 hover:text-white transition-all duration-200"
+              >
+                {client}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Stats Banner ── */}
+      <section className="bg-dcs-navy-dark py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { val: '1,000+', label: 'Projects Delivered' },
-              { val: '15+',    label: 'Cities Across South India' },
-              { val: '5',      label: 'Sectors Served' },
-              { val: '100%',   label: 'On-Time Delivery Rate' },
+              { val: '500+',   label: 'Clients Served' },
+              { val: '7+',     label: 'Service Categories' },
+              { val: '100%',   label: 'On-Time Delivery' },
             ].map((stat) => (
               <div key={stat.label}>
                 <p className="font-outfit font-black text-4xl text-dcs-red">{stat.val}</p>

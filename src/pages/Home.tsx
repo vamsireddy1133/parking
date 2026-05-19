@@ -326,10 +326,10 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group glow-hover"
               >
-                <div className="h-52 relative overflow-hidden bg-dcs-navy">
-                  <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                  <span className={`absolute bottom-3 left-3 text-xs font-inter font-semibold px-3 py-1 rounded-full border backdrop-blur-sm ${p.badge}`}>
+                <div className="h-44 bg-gradient-to-br from-dcs-navy to-dcs-navy-dark relative flex flex-col items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 grid-bg opacity-40" />
+                  <Car size={48} className="text-white/10 mb-3" />
+                  <span className={`relative text-xs font-inter font-semibold px-3 py-1 rounded-full border ${p.badge}`}>
                     {p.category}
                   </span>
                 </div>

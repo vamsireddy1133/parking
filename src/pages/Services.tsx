@@ -168,15 +168,15 @@ export default function Services() {
               </div>
 
               {/* Visual side */}
-              <div className="relative min-h-[320px] overflow-hidden bg-dcs-navy group/img">
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  className="w-full h-full object-cover absolute inset-0 group-hover/img:scale-105 transition-transform duration-700 ease-out"
-                />
-                {/* Subtle gradient overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${s.color} opacity-30 mix-blend-multiply`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+              <div className={`relative min-h-[320px] bg-gradient-to-br ${s.color} bg-dcs-navy flex items-center justify-center p-10`}>
+                <div className="absolute inset-0 grid-bg opacity-40" />
+                <div className="relative text-center">
+                  <div className={`w-24 h-24 rounded-3xl bg-gradient-to-br ${s.color} border border-white/15 flex items-center justify-center mx-auto mb-6 animate-float`}>
+                    <s.icon size={44} className={s.iconColor} />
+                  </div>
+                  <p className={`font-outfit font-black text-2xl ${s.iconColor} mb-1`}>{s.title}</p>
+                  <p className="text-gray-400 font-inter text-sm">{s.tagline}</p>
+                </div>
               </div>
             </motion.div>
           ))}
