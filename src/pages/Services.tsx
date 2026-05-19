@@ -223,15 +223,14 @@ export default function Services() {
                       <p className="text-gray-400 font-inter text-sm leading-relaxed">{s.description}</p>
                     </div>
                   </div>
-                  {/* Right: benefits */}
-                  <ul className="col-span-3 grid grid-cols-2 gap-x-8 gap-y-3">
-                    {s.benefits.map((b) => (
-                      <li key={b} className="flex items-start space-x-2.5">
-                        <CheckCircle size={15} className="text-dcs-red mt-0.5 shrink-0" />
-                        <span className="text-gray-300 font-inter text-sm leading-relaxed">{b}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Right: image */}
+                  <div className="col-span-3 rounded-2xl overflow-hidden h-64">
+                    <img
+                      src={s.image}
+                      alt={s.imageAlt}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
                 </div>
               </motion.div>
             ))}
