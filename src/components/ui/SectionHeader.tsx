@@ -17,7 +17,7 @@ export default function SectionHeader({ badge, title, subtitle, align = 'center'
       viewport={{ once: true }}
       className={`flex flex-col ${isCenter ? 'items-center text-center max-w-3xl mx-auto' : 'items-start text-left max-w-2xl'}`}
     >
-      <span className="inline-flex items-center bg-dcs-red/10 border border-dcs-red/25 text-dcs-red text-xs font-inter font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
+      <span className="inline-flex items-center bg-white/5 border border-white/15 text-gray-400 text-xs font-inter font-semibold px-4 py-1.5 rounded-full mb-4 uppercase tracking-wider">
         {badge}
       </span>
       <h2 className="font-outfit font-black text-3xl sm:text-4xl text-white mb-4 leading-tight">
