@@ -6,6 +6,7 @@ import Footer from './components/layout/Footer'
 import PageLoader from './components/ui/PageLoader'
 import PageTransition from './components/ui/PageTransition'
 import ScrollProgress from './components/ui/ScrollProgress'
+import WhatsAppButton from './components/ui/WhatsAppButton'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import About from './pages/About'
@@ -47,6 +48,7 @@ function Layout() {
         <AnimatedRoutes />
       </main>
       <Footer />
+      <WhatsAppButton />
     </>
   )
 }

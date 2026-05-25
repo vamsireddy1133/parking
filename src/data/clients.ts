@@ -8,6 +8,7 @@ export interface ClientGroup {
   name: string
   category: Category
   projects: string[]
+  image?: string
 }
 
 export const clients: ClientGroup[] = [
@@ -15,6 +16,7 @@ export const clients: ClientGroup[] = [
     id: 'salarpuria',
     name: 'Salarpuria Satva',
     category: 'Commercial',
+    image: '/projects/salarpuria.png',
     projects: [
       'Salarpuria Satva Knowledge Park',
       'Salarpuria Satva Knowledge Capital',
@@ -28,6 +30,7 @@ export const clients: ClientGroup[] = [
     id: 'myhome',
     name: 'MyHome',
     category: 'Residential',
+    image: '/projects/myhome.png',
     projects: [
       'MyHome Bhooja',
       'MyHome Twitza',
@@ -44,6 +47,7 @@ export const clients: ClientGroup[] = [
     id: 'phoenix',
     name: 'Phoenix Group',
     category: 'Commercial',
+    image: '/projects/phoenix.png',
     projects: [
       'Phoenix Centarus',
       'Phoenix Litho',
@@ -56,6 +60,7 @@ export const clients: ClientGroup[] = [
     id: 'rajapushpa',
     name: 'Rajapushpa',
     category: 'Residential',
+    image: '/projects/rajapushpa.png',
     projects: [
       'Rajapushpa Summit',
       'Rajapushpa Paradium',
@@ -66,6 +71,7 @@ export const clients: ClientGroup[] = [
     id: 'smr',
     name: 'SMR',
     category: 'Residential',
+    image: '/projects/smr.png',
     projects: [
       'SMR Casa Carino Villas',
       'SMR Iconia',
@@ -75,6 +81,7 @@ export const clients: ClientGroup[] = [
     id: 'aurobindo',
     name: 'Aurobindo',
     category: 'Residential',
+    image: '/projects/aurobindo.png',
     projects: [
       'Aurobindo Galaxy',
       'Aurobindo Orbit',
@@ -84,6 +91,7 @@ export const clients: ClientGroup[] = [
     id: 'asbl',
     name: 'ASBL',
     category: 'Residential',
+    image: '/projects/asbl.png',
     projects: [
       'ASBL Lakeside',
       'ASBL Spire',
@@ -93,92 +101,107 @@ export const clients: ClientGroup[] = [
     id: 'amazon',
     name: 'Amazon',
     category: 'Commercial',
+    image: '/projects/amazon.png',
     projects: ['Amazon Hyderabad Campus'],
   },
   {
     id: 'google',
     name: 'Google',
     category: 'Commercial',
+    image: '/projects/google.png',
     projects: ['Google Hyderabad Office'],
   },
   {
     id: 'raheja',
     name: 'Raheja Mindspace',
     category: 'Commercial',
+    image: '/projects/raheja.png',
     projects: ['Raheja Mindspace IT Park'],
   },
   {
     id: 'capitaland',
     name: 'Capitaland',
     category: 'Commercial',
+    image: '/projects/capitaland.png',
     projects: ['Capitaland'],
   },
   {
     id: 'jpmc',
     name: 'JPMC',
     category: 'Commercial',
+    image: '/projects/jpmc.png',
     projects: ['JPMC'],
   },
   {
     id: 'pranava',
     name: 'Pranava Group',
     category: 'Commercial',
+    image: '/projects/pranava.png',
     projects: ['Pranava Group'],
   },
   {
     id: 'gsquare',
     name: 'GSquare',
     category: 'Commercial',
+    image: '/projects/gsquare.png',
     projects: ['GSquare'],
   },
   {
     id: 'simplywork',
     name: 'Simply Work',
     category: 'Commercial',
+    image: '/projects/simplywork.png',
     projects: ['Simply Work'],
   },
   {
     id: 'kurnool',
     name: 'Kurnool TG Mall',
     category: 'Commercial',
+    image: '/projects/kurnool.png',
     projects: ['Kurnool TG Mall'],
   },
   {
     id: 'sriaditya',
     name: 'Sri Aditya',
     category: 'Residential',
+    image: '/projects/sriaditya.png',
     projects: ['Sri Aditya'],
   },
   {
     id: 'hrmani',
     name: 'Hrmani',
     category: 'Residential',
+    image: '/projects/hrmani.png',
     projects: ['Hrmani'],
   },
   {
     id: 'sindhu',
     name: 'Sindhu Hospitals',
     category: 'Healthcare',
+    image: '/projects/sindhu.png',
     projects: ['Sindhu Hospitals'],
   },
   {
     id: 'jubilee',
     name: 'Jubilee Hills Club',
     category: 'Hospitality',
+    image: '/projects/jubilee.png',
     projects: ['Jubilee Hills Club'],
   },
   {
     id: 'filmnagar',
     name: 'Filmnagar Club',
     category: 'Hospitality',
+    image: '/projects/filmnagar.png',
     projects: ['Filmnagar Club'],
   },
   {
     id: 'meru',
     name: 'Meru International School',
     category: 'Education',
+    image: '/projects/meru.png',
     projects: ['Meru International School'],
-  },
+  }
 ]
 
 export interface CategoryStyle {

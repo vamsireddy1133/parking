@@ -74,7 +74,7 @@ export default function Projects() {
 
       {/* ── Client Cards ── */}
       <section className="px-4 sm:px-6 lg:px-8 pb-24">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-7xl mx-auto">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
@@ -82,7 +82,7 @@ export default function Projects() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
             >
               {filtered.map((client, i) => {
                 const style = categoryStyle[client.category]
@@ -97,33 +97,46 @@ export default function Projects() {
                   >
                     <Link
                       to={`/clients/${client.id}`}
-                      className={`flex items-center justify-between bg-gradient-to-r ${style.grad} border border-white/8 hover:border-dcs-red/50 hover:shadow-lg hover:shadow-dcs-red/10 rounded-2xl px-6 py-5 transition-all duration-300 group`}
+                      className="flex flex-col bg-dcs-navy-light border border-white/8 hover:border-dcs-red/50 hover:shadow-lg hover:shadow-dcs-red/10 rounded-2xl overflow-hidden transition-all duration-300 group"
                     >
-                      {/* Left: icon + name + badge */}
-                      <div className="flex items-center space-x-4 flex-1 justify-center">
-                        <div className="w-12 h-12 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center shrink-0">
-                          <Icon size={20} className={style.accent} />
-                        </div>
-                        <div className="text-center">
-                          <h3 className="font-outfit font-bold text-lg text-white leading-tight">
-                            {client.name}
-                          </h3>
-                          <div className="flex items-center justify-center space-x-3 mt-1">
-                            <span className={`text-xs font-inter font-semibold px-2.5 py-0.5 rounded-full border ${style.badge}`}>
-                              {client.category}
-                            </span>
-                            <span className="text-gray-500 font-inter text-xs">
-                              {client.projects.length} {client.projects.length === 1 ? 'project' : 'projects'}
-                            </span>
-                          </div>
+                      {/* Top: Image */}
+                      <div className="h-48 w-full overflow-hidden relative">
+                        <div className="absolute inset-0 bg-gradient-to-t from-dcs-navy-light via-transparent to-transparent z-10 opacity-90" />
+                        <img 
+                          src={client.image || `/projects/${client.category.toLowerCase()}1.jpg`} 
+                          alt={client.name}
+                          onError={(e) => {
+                            e.currentTarget.src = `/projects/${client.category.toLowerCase()}1.jpg`;
+                          }}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute top-3 right-3 z-20">
+                          <span className={`text-xs font-inter font-bold px-2.5 py-1 rounded-full border bg-black/50 backdrop-blur-md ${style.badge}`}>
+                            {client.category}
+                          </span>
                         </div>
                       </div>
 
-                      {/* Right: arrow */}
-                      <ArrowUpRight
-                        size={20}
-                        className="text-gray-500 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0"
-                      />
+                      {/* Bottom: Content */}
+                      <div className="p-5 flex items-center justify-between relative z-20">
+                        <div className="flex items-center space-x-4">
+                          <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${style.grad} border border-white/10 flex items-center justify-center shrink-0`}>
+                            <Icon size={18} className={style.accent} />
+                          </div>
+                          <div>
+                            <h3 className="font-outfit font-bold text-lg text-white leading-tight">
+                              {client.name}
+                            </h3>
+                            <p className="text-gray-400 font-inter text-xs mt-1">
+                              {client.projects.length} {client.projects.length === 1 ? 'project' : 'projects'}
+                            </p>
+                          </div>
+                        </div>
+                        <ArrowUpRight
+                          size={20}
+                          className="text-gray-500 group-hover:text-dcs-red group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0"
+                        />
+                      </div>
                     </Link>
                   </motion.div>
                 )
