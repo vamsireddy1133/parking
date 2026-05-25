@@ -84,21 +84,21 @@ const projects = [
     category: 'Commercial',
     description: 'Multi-level basement parking with epoxy slot markings, column numbering, retroreflective signage, and traffic flow design.',
     badge: 'bg-blue-500/20 text-blue-300',
-    image: '/p1.png',
+    image: '/projects/salarpuria.png',
   },
   {
     title: 'MyHome Bhooja',
     category: 'Residential',
     description: 'Premium residential tower with colour-coded zone markings, pillar numbering, visitor bay management, and smart parking allocation.',
     badge: 'bg-emerald-500/20 text-emerald-300',
-    image: '/p2.png',
+    image: '/projects/myhome.png',
   },
   {
     title: 'Phoenix Centarus',
     category: 'Commercial',
     description: 'End-to-end parking solution with epoxy markings, LED wayfinding signage, EV charging bays, and FASTag-integrated billing.',
     badge: 'bg-blue-500/20 text-blue-300',
-    image: '/p3.png',
+    image: '/projects/phoenix.png',
   },
 ]
 
@@ -326,10 +326,10 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="rounded-2xl overflow-hidden border border-white/5 hover:border-white/15 transition-all duration-300 hover:-translate-y-1 group glow-hover"
               >
-                <div className="h-44 bg-gradient-to-br from-dcs-navy to-dcs-navy-dark relative flex flex-col items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 grid-bg opacity-40" />
-                  <Car size={48} className="text-white/10 mb-3" />
-                  <span className={`relative text-xs font-inter font-semibold px-3 py-1 rounded-full border ${p.badge}`}>
+                <div className="h-52 relative overflow-hidden">
+                  <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dcs-navy-dark/60 to-transparent" />
+                  <span className={`absolute top-3 right-3 text-xs font-inter font-semibold px-3 py-1 rounded-full border ${p.badge} backdrop-blur-sm`}>
                     {p.category}
                   </span>
                 </div>
